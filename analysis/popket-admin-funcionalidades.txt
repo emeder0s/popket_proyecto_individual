@@ -1,0 +1,15 @@
+POPKET- Admin - Funcionalidades
+Usuarios:
+-	Crear
+-	Borrar
+Spacers:
+-	Crear
+-	Borrar
+Space
+-	Crear
+-	Borrar
+Productos:
+-	Crear
+-	Borrar
+
+
