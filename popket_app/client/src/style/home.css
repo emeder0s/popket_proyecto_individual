@@ -1,0 +1,44 @@
+.intro-container{
+    background: url("../img/intro.jpg") no-repeat center top;
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    padding-bottom: 56%;
+}
+
+.about-us-container{
+    background: url("../img/aboutUs.jpg") no-repeat center top;
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    padding-bottom: 65%;
+}
+
+.about-spaces-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: url("../img/aboutSpacer.jpg") no-repeat center top;
+    background-position: center top;
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    padding-bottom: 61%;
+}
+
+.about-spaces-container h2{
+    font-size: 324%;
+    color: white;
+}
+
+button{
+    background: white;
+    border: none;
+    padding: 1% 4%;
+    box-shadow: 2px 1px 4px pink;
+    color: #c07180;
+    cursor:pointer;
+}
+
+
+
+
