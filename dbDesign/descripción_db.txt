@@ -1,0 +1,21 @@
+Como debemos usar tanto bases de datos relacionales como no relacionales, he decidido llevar
+la siguiente organización:
+
+- En la base de datos no relacional: aquellas tablas intermedias de las cuales extraer la 
+información de las relaciones se más sencilla, como pueden ser los comentarios de productos 
+o los productos favoritos de un usuario o incluso que no haya relación, como las credenciales
+del administrador.
+
+
+- En la base de datos relacional: todas aquellas tablas que corresponden a las entidades principales
+de la web y que por lo tanto hay una fuerte relación entre ellas: los spacers crean spaces donde
+se suben productos que son comprados por los clientes. Las tablas relacionales serían:
+	- spacers -> recopila la información de los spacers.
+	- spaces -> recopila la información de los espacios.
+	- products -> datos del producto.
+	- users -> recopila la información de los usuarios.
+	- address -> la dirección de un usuario/spacer.
+	- orders -> recopila la información de un pedido.
+	- orders_products	-> relaciona los productos y cantidad de los mismos en un pedido.
+	- users_spacers_orders -> relaciona los pedidos con los usuarios/spacers (ya que los 
+	  spacers también puede hacer pedidos a otros espacios).
