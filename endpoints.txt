@@ -1,0 +1,84 @@
+PAGES
+
+//renderiza página de inicio
+router.get("/", page.home); 
+
+//renderiza página dónde se muestran todos los spaces
+router.get("/all-spaces", page.spaces); 
+
+//renderiza la página donde se explica cómo hacerse spacer, que és, cómo crear un space....
+router.get("/info-space", page.infoSpaces); 
+
+//renderiza la página de sigin de un spacer
+router.get("/signin-spacer", page.singinSpacer); 
+
+//renderiza la página de login de usuario
+router.get("/login", page.login); 
+
+//renderiza la página de login de spacer
+router.get("/login-spacer", page.loginSpacer); 
+
+//renderiza la página dónde se muestran todos los spaces
+router.get("/all-spaces", page.spaces); 
+
+//renderiza la página principal de un space
+router.get("/space/:id", page.space); 
+
+//renderiza la página principal de un producto
+router.get("/product/:idProduct", page.product); 
+
+USER
+
+//autenticación de un usuario
+router.post("/login-auth, user.loginAuth);
+
+//añade un comentario de un producto
+router.put("/comment/:idUser, user.comment); 
+
+ADDRESS
+
+//añadir dirección
+router.post("/edit, product.edit);
+
+//editar dirección
+router.post("/edit, product.edit);
+
+SPACER
+
+//autenticación de un usuario
+router.post("/login-auth, spacer.loginAuth);
+
+//modificación datos de un spacer
+router.post("/edit, spacer.edit);
+
+//añade un comentario de un producto
+router.put("/comment/:idSpacer, user.comment); 
+
+SPACES
+
+//añadir un space
+router.post("/add, space.add);
+
+PRODUCTS
+
+//añadir un producto
+router.post("/add, product.add);
+
+//editar producto
+router.post("/edit, product.edit);
+
+ADDRESS
+
+//añadir dirección
+router.post("/edit, address.edit);
+
+//editar dirección
+router.post("/edit, address.edit);
+
+ORDERS
+//añadir un pedido
+router.post("/add/:idUser, product.add);
+
+
+
+
