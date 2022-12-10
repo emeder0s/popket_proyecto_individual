@@ -12,6 +12,9 @@
     background-size: 100% auto;
     background-repeat:no-repeat;
     padding-bottom: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .about-spaces-container{
@@ -23,6 +26,14 @@
     background-size: 100% auto;
     background-repeat:no-repeat;
     padding-bottom: 61%;
+}
+
+.about-us-text-container{
+    background: #ffffffd9;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    width: 70%;
 }
 
 .about-spaces-container h2{
@@ -37,6 +48,11 @@ button{
     box-shadow: 2px 1px 4px pink;
     color: #c07180;
     cursor:pointer;
+}
+
+.sign {
+    margin: 0px 10px;
+    text-align: right;
 }
 
 
