@@ -19,7 +19,7 @@ const spacer = {
    * @param {json} req Objeto solicitud
    * @param {json} res Objeto respuesta
    */
-  register: async (req, res) => {
+  sigin: async (req, res) => {
     try {
       const { first_name, last_name, email, phone, spacer_password } = req.body;
       const spacer_password_hash = await bcyptjs.hash(spacer_password, 8);

@@ -1,3 +1,4 @@
+const connection = require("../databases/sequelize.js");
 const bcyptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
@@ -19,11 +20,13 @@ const user = {
    * @param {json} req Objeto solicitud
    * @param {json} res Objeto respuesta
    */
-  register: async (req, res) => {
+  sigin: async (req, res) => {
     try {
       const { first_name, last_name, email, phone, user_password } = req.body;
       const user_password_hash = await bcyptjs.hash(user_password, 8);
+      const con = await connection.conn();
       const user = await userModel.create({ first_name, last_name, email, phone, "user_password": user_password_hash })
+      await sequelize.conn(con);
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);

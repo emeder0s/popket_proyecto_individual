@@ -32,6 +32,9 @@ USER
 //autenticación de un usuario
 router.post("/login-auth, user.loginAuth);
 
+//sig in de un usuario
+router.post("/sigin, user.sigin);
+
 //añade un comentario de un producto
 router.put("/comment/:idUser, user.comment); 
 
@@ -48,6 +51,9 @@ SPACER
 //autenticación de un usuario
 router.post("/login-auth, spacer.loginAuth);
 
+//sig in de un spacer
+router.post("/sigin-spacer, spacer.sigin);
+
 //modificación datos de un spacer
 router.post("/edit, spacer.edit);
 
@@ -57,7 +63,13 @@ router.put("/comment/:idSpacer, user.comment);
 SPACES
 
 //añadir un space
-router.post("/add, space.add);
+router.post("/add-space, space.add);
+
+//editar un space
+router.post("/edit-space, space.edit);
+
+//eliminar un space
+router.delete("/delete-space, space.delete);
 
 PRODUCTS
 
