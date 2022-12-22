@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 const connection = {
-    conn: async () => {
+    open: async () => {
         const sequelize = new Sequelize('popket', 'root', 'root', {
             host: 'localhost',
             timezone: '+01:00',
@@ -15,7 +15,7 @@ const connection = {
         
         return sequelize;
     },
-    disconn: async con => {
+    close: async con => {
         await con.close();
         console.log("Sequelize DB Disconnect");
     }
