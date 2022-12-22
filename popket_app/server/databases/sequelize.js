@@ -1,15 +1,9 @@
 const Sequelize = require('sequelize')
 const connection = {
-    db: () =>{
-        return new Sequelize('popket', 'root', 'root', {
-            host: 'localhost',
-            dialect: 'mysql',
-            port: 3306
-        })
-    },
     conn: async () => {
         const sequelize = new Sequelize('popket', 'root', 'root', {
             host: 'localhost',
+            timezone: '+01:00',
             dialect: 'mysql',
             port: 3306
         })

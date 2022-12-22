@@ -25,8 +25,8 @@ const user = {
       const { first_name, last_name, email, phone, user_password } = req.body;
       const user_password_hash = await bcyptjs.hash(user_password, 8);
       const con = await connection.conn();
-      const user = await userModel.create({ first_name, last_name, email, phone, "user_password": user_password_hash })
-      await sequelize.conn(con);
+      const user = await userModel.create(con);
+      await user.create({ first_name, last_name, email, phone, "user_password": user_password_hash })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
