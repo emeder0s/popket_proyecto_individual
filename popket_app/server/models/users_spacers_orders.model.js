@@ -8,7 +8,7 @@ UserSpacerOrderModel = {
                 autoIncrement: true,
                 primaryKey: true
             },
-            fk_id_user_spacer: {
+            id_user_spacer: {
                 type: DataTypes.INTEGER,
                 allowNull: false
             },

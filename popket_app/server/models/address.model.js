@@ -24,10 +24,6 @@ addressModel = {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            locality: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
             postal_code: {
                 type: DataTypes.STRING,
                 allowNull: false

@@ -8,8 +8,8 @@ const space = require("../controllers/space.controllers");
 // router.post("/sigin", user.sigin); //Registro de usuarios
 
 //SPACES
-router.post("/add-space", space.add); //Añade un space
-router.post("/update-space", space.update); //Modifica un space
+router.post("/add-space", space.new); //Añade un space
+router.post("/update-space", space.edit); //Modifica un space
 router.get("/space/:id",space.show); //Elimina un space
 router.delete("delete-space/:id",space.delete )
 

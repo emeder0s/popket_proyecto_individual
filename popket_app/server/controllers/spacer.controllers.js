@@ -1,36 +1,80 @@
-const bcyptjs = require('bcryptjs');
-const jwt = require("jsonwebtoken");
-
+const connection = require("../databases/sequelize");
 const spacerModel = require("../models/spacer.model");
 
 const spacer = {
   /**
-   * Devuelve todos los usuarios
-   * @param {json} req Objeto solicitud
+   * Inserta un spacer
+   * @param {json} req La petición
    * @param {json} res Objeto respuesta
    */
-   findAll: async (req, res) => {
-    const spacers = await spacers.findAll();
-    res.json(spacers);
+  new: async (req, res) => {
+    try {
+      const { first_name, last_name, email, phone="", spacer_password  } = req.body;
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const spacer = await spacerM.create({ first_name, last_name, email, phone, spacer_password })
+      res.json(true);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+        res.json(false);
+    }finally{
+      await connection.close(con);
+    }
   },
 
   /**
-   * Registra un usuario en la base de datos encriptando previamente la contraseña.
-   * @param {json} req Objeto solicitud
-   * @param {json} res Objeto respuesta
+   * Actualiza los datos de un spacer 
+   * @param {*} req la petición
+   * @param {*} res la respuesta a la petición
    */
-  sigin: async (req, res) => {
+  edit: async (req, res) => {
     try {
-      const { first_name, last_name, email, phone, spacer_password } = req.body;
-      const spacer_password_hash = await bcyptjs.hash(spacer_password, 8);
-      const spacer = await spacerModel.create({ first_name, last_name, email, phone, "spacer_password": spacer_password_hash })
+      const { id,first_name, last_name, email, phone, spacer_password  } = req.body;
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const spacer = await spacerM.update({ first_name, last_name, email, phone, spacer_password  }, {where :{id}})
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);
+    }finally{
+      await connection.close(con);
     }
   },
-   
+
+  show: async (req, res) => {
+    try {
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const spacer = await spacerM.findOne({ where: { id: req.params.id } })
+      res.json(true);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+  },
+
+  
+  /**
+     * Borra un spacer.
+     * @param {json} req Objeto solicitud
+     * @param {json} res Objeto respuesta
+     */
+  delete: async (req, res) => {
+    try {
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const spacer = await spacerM.destoy({ where: { id:req.params.id } })
+      res.json(true);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+  }, 
 }
 
 module.exports = spacer;

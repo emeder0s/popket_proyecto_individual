@@ -1,18 +1,18 @@
 const connection = require("../databases/sequelize");
-const userModel = require("../models/user.model");
+const productModel = require("../models/product.model");
 
-const user = {
+const product = {
   /**
-   * Inserta un user
+   * Inserta un product
    * @param {json} req La petición
    * @param {json} res Objeto respuesta
    */
   new: async (req, res) => {
     try {
-      const { first_name, last_name, email, phone="", user_password  } = req.body;
+      const { product_name, description, price, image, fk_id_space  } = req.body;
       var con = await connection.open();
-      const userM = await userModel.create(con);
-      const user = await userM.create({ first_name, last_name, email, phone, user_password })
+      const productM = await productModel.create(con);
+      const product = await productM.create({ product_name, description, price, image, fk_id_space })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -23,16 +23,16 @@ const user = {
   },
 
   /**
-   * Actualiza los datos de un user 
+   * Actualiza los datos de un product 
    * @param {*} req la petición
    * @param {*} res la respuesta a la petición
    */
   edit: async (req, res) => {
     try {
-      const { id,first_name, last_name, email, phone, user_password  } = req.body;
+      const { id,product_name, description, price, image } = req.body;
       var con = await connection.open();
-      const userM = await userModel.create(con);
-      const user = await userM.update({ first_name, last_name, email, phone, user_password  }, {where :{id}})
+      const productM = await productModel.create(con);
+      const product = await productM.update({ product_name, description, price, image }, {where :{id}})
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -45,8 +45,8 @@ const user = {
   show: async (req, res) => {
     try {
       var con = await connection.open();
-      const userM = await userModel.create(con);
-      const user = await userM.findOne({ where: { id: req.params.id } })
+      const productM = await productModel.create(con);
+      const product = await productM.findOne({ where: { id: req.params.id } })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -55,18 +55,17 @@ const user = {
       await connection.close(con);
     }
   },
-
   
   /**
-     * Borra un user.
+     * Borra un product.
      * @param {json} req Objeto solicitud
      * @param {json} res Objeto respuesta
      */
   delete: async (req, res) => {
     try {
       var con = await connection.open();
-      const userM = await userModel.create(con);
-      const user = await userM.destoy({ where: { id:req.params.id } })
+      const productM = await productModel.create(con);
+      const product = await productM.destoy({ where: { id:req.params.id } })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -77,4 +76,4 @@ const user = {
   }, 
 }
 
-module.exports = user;
+module.exports = product;

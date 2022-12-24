@@ -17,7 +17,7 @@ productModel = {
                 allowNull: true
             },
             price: {
-                type: DataTypes.STRING,
+                type: DataTypes.FLOAT,
                 allowNull: false
             },
             image: {

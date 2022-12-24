@@ -1,13 +1,13 @@
 const connection = require("../databases/sequelize");
 const spaceModel = require("../models/space.model");
 
-const spacer = {
+const space = {
   /**
    * Inserta un space
    * @param {json} req La petición
    * @param {json} res Objeto respuesta
    */
-  add: async (req, res) => {
+  new: async (req, res) => {
     try {
       const { name_space, state, description } = req.body;
       var fk_id_spacer = "1"; //AQUÍ HABRÁ QUE RECOGER EL ID DEL SPACE LOGUEADO
@@ -28,7 +28,7 @@ const spacer = {
    * @param {*} req la petición
    * @param {*} res la respuesta a la petición
    */
-  update: async (req, res) => {
+  edit: async (req, res) => {
     try {
       const { id,name_space, state, description } = req.body;
       var con = await connection.open();
@@ -78,4 +78,4 @@ const spacer = {
   }, 
 }
 
-module.exports = spacer;
+module.exports = space;
