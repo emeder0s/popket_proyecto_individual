@@ -8,11 +8,11 @@ spaceModel = {
                 autoIncrement: true,
                 primaryKey: true
             },
-            state: {
+            name_space: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            name_space: {
+            state: {
                 type: DataTypes.STRING,
                 allowNull: false
             },

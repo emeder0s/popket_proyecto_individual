@@ -10,7 +10,7 @@ const space = {
   new: async (req, res) => {
     try {
       const { name_space, state, description } = req.body;
-      var fk_id_spacer = "1"; //AQUÍ HABRÁ QUE RECOGER EL ID DEL SPACE LOGUEADO
+      var fk_id_spacer = 1; //AQUÍ HABRÁ QUE RECOGER EL ID DEL SPACE LOGUEADO
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.create({ name_space, state, description, fk_id_spacer })
@@ -31,6 +31,7 @@ const space = {
   edit: async (req, res) => {
     try {
       const { id,name_space, state, description } = req.body;
+      console.log(description);
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.update({ name_space, state, description }, {where :{id}})
@@ -48,7 +49,7 @@ const space = {
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.findOne({ where: { id: req.params.id } })
-      res.json(true);
+      res.json(space);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);
@@ -57,7 +58,6 @@ const space = {
     }
   },
 
-  
   /**
      * Borra un space.
      * @param {json} req Objeto solicitud
@@ -67,7 +67,7 @@ const space = {
     try {
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
-      const space = await spaceM.destoy({ where: { id:req.params.id } })
+      const space = await spaceM.destroy({ where: { id:req.params.id } })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);

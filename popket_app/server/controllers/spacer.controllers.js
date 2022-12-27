@@ -1,5 +1,7 @@
 const connection = require("../databases/sequelize");
 const spacerModel = require("../models/spacer.model");
+const bcyptjs = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 
 const spacer = {
   /**
@@ -9,16 +11,22 @@ const spacer = {
    */
   new: async (req, res) => {
     try {
-      const { first_name, last_name, email, phone="", spacer_password  } = req.body;
+      const { first_name, last_name, email, phone="", spacer_password } = req.body;
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
-      const spacer = await spacerM.create({ first_name, last_name, email, phone, spacer_password })
-      res.json(true);
+      if (await spacerM.findOne({ where: { email } })){
+        res.json({validation:"false",msn:"Ups!! Ya existe una cuenta con este email"});
+      }else{
+        const pass_hash = await bcyptjs.hash(spacer_password, 8);
+        const spacer = await spacerM.create({ first_name, last_name, email, phone, spacer_password:pass_hash });
+        const infoJwt = jwt.sign({ email, "id": spacer.dataValues.id, "first_name":spacer.dataValues.first_name }, "m1c4s4");
+        res.json({"jwt":infoJwt, spacer:{"first_name":spacer.dataValues.first_name, "id":spacer.dataValues.id}});
+      }
     } catch (ValidationError) {
         console.log(ValidationError);
         res.json(false);
     }finally{
-      await connection.close(con);
+        await connection.close(con);
     }
   },
 
@@ -29,10 +37,11 @@ const spacer = {
    */
   edit: async (req, res) => {
     try {
-      const { id,first_name, last_name, email, phone, spacer_password  } = req.body;
+      let id = spacer.getIdFromCookie(req);
+      const { first_name, last_name, phone } = req.body;
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
-      const spacer = await spacerM.update({ first_name, last_name, email, phone, spacer_password  }, {where :{id}})
+      await spacerM.update({ first_name, last_name, phone }, {where :{id}})
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -47,7 +56,7 @@ const spacer = {
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
       const spacer = await spacerM.findOne({ where: { id: req.params.id } })
-      res.json(true);
+      res.json(spacer);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);
@@ -55,7 +64,6 @@ const spacer = {
       await connection.close(con);
     }
   },
-
   
   /**
      * Borra un spacer.
@@ -66,7 +74,7 @@ const spacer = {
     try {
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
-      const spacer = await spacerM.destoy({ where: { id:req.params.id } })
+      const spacer = await spacerM.destroy({ where: { id:req.params.id } })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -74,7 +82,63 @@ const spacer = {
     }finally{
       await connection.close(con);
     }
-  }, 
+  },
+
+    /**
+   * Devuelve la id del spacer que tiene sesion iniciada
+   * @param {json} req la petición
+   * @returns {integer}
+   */
+    get_id_from_cookie: (req) => {
+      let jwtVerify = jwt.verify(req.cookies.session, "m1c4s4");
+      return jwtVerify.id
+    },
+
+  /**
+   * Login del spacer
+   * @param {json} req la petición
+   * @param {json} res la respuesta de la petición
+   */
+  login: async (req, res) => {
+    try {
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const { email, spacer_password } = req.body;
+      const spacer = await spacerM.findOne({ where: { email } });
+      if (spacer) {
+          let hashSaved = spacer.dataValues.spacer_password;
+          let compare = bcyptjs.compareSync(spacer_password, hashSaved);
+          const infoJwt = jwt.sign({ email, "id": spacer.dataValues.id, "first_name":spacer.dataValues.first_name }, "m1c4s4");
+          if (compare) {
+            res.cookie("session", infoJwt)
+            res.json({ validation: true, "jwt": infoJwt, spacer:spacer.dataValues });
+          } else {
+          res.json({validation:"false",msn:"Ohh!! Usuario o contraseña incorrectos"});
+           }
+      } else {
+        res.json({validation:"false",msn:"Ohh!! Usuario o contraseña incorrectos"});
+      }
+    } catch (error) {
+      res.json(error)
+   
+    } finally {
+      await connection.close(con);
+    }
+  },
+
+
+  /**
+   * Log out del spacer - limpia la cookie con el JWT del navegador
+   * @param {json} req la petición
+   * @param {json} res la respuesta de la petición
+   */
+  logout: (req, res) => {
+    var cookies = req.cookies;
+    if (cookies) {
+      var token = cookies.session;
+      res.json(token);
+    }
+  }
 }
 
 module.exports = spacer;
