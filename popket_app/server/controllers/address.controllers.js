@@ -31,10 +31,10 @@ const address = {
    */
   edit: async (req, res) => {
     try {
-      const { id,address_name, description, price, image } = req.body;
+      const { id, via_type, via_name, via_number, additional_address, postal_code, locality, province, country } = req.body;
       var con = await connection.open();
       const addressM = await addressModel.create(con);
-      const address = await addressM.update({ address_name, description, price, image }, {where :{id}})
+      const address = await addressM.update({ via_type, via_name, via_number, additional_address, postal_code, locality, province, country }, {where :{id}})
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
