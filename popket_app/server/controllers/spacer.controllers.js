@@ -1,5 +1,7 @@
 const connection = require("../databases/sequelize");
 const spacerModel = require("../models/spacer.model");
+const userModel = require("../models/user.model");
+const session = require("./session.controller");
 const bcyptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
@@ -13,8 +15,9 @@ const spacer = {
     try {
       const { first_name, last_name, email, phone="", spacer_password } = req.body;
       var con = await connection.open();
+      const userM = await userModel.create(con);
       const spacerM = await spacerModel.create(con);
-      if (await spacerM.findOne({ where: { email } })){
+      if (await userM.findOne({ where: { email } }) || await spacerM.findOne({ where: { email } })){
         res.json({validation:"false",msn:"Ups!! Ya existe una cuenta con este email"});
       }else{
         const pass_hash = await bcyptjs.hash(spacer_password, 8);
@@ -37,7 +40,7 @@ const spacer = {
    */
   edit: async (req, res) => {
     try {
-      let id = spacer.getIdFromCookie(req);
+      let id = spacer.get_id_from_cookie(req);
       const { first_name, last_name, phone } = req.body;
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
@@ -84,16 +87,6 @@ const spacer = {
     }
   },
 
-    /**
-   * Devuelve la id del spacer que tiene sesion iniciada
-   * @param {json} req la petición
-   * @returns {integer}
-   */
-    get_id_from_cookie: (req) => {
-      let jwtVerify = jwt.verify(req.cookies.session, "m1c4s4");
-      return jwtVerify.id
-    },
-
   /**
    * Login del spacer
    * @param {json} req la petición
@@ -123,20 +116,6 @@ const spacer = {
    
     } finally {
       await connection.close(con);
-    }
-  },
-
-
-  /**
-   * Log out del spacer - limpia la cookie con el JWT del navegador
-   * @param {json} req la petición
-   * @param {json} res la respuesta de la petición
-   */
-  logout: (req, res) => {
-    var cookies = req.cookies;
-    if (cookies) {
-      var token = cookies.session;
-      res.json(token);
     }
   }
 }
