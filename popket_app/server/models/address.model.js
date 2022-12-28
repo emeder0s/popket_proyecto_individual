@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 addressModel = {
     create: async (sequelize) => {
-        const Addresses = sequelize.define("addresss",{
+        const Addresses = sequelize.define("addresses",{
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,

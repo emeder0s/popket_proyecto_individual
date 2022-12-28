@@ -1,7 +1,7 @@
 const connection = require("../databases/sequelize");
 const userModel = require("../models/user.model");
 const spacerModel = require("../models/spacer.model");
-const session = require("./session.controller");
+const session = require("./session.controllers");
 const bcyptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
@@ -91,16 +91,15 @@ const user = {
    * Añade el id de una dirección a un usuario
    * @param {int} fk_id_address el identificador de la dirección del usuario
    */
-  add_address: async (fk_id_address) => {
+  add_address: async (req,con,fk_id_address) => {
     try {
       let id = session.get_id_from_cookie(req);
-      var con = await connection.open();
+      console.log(id);
+      console.log(fk_id_address);
       const userM = await userModel.create(con);
       await userM.update({ fk_id_address}, {where :{id}})
     } catch (ValidationError) {
         console.log(ValidationError);
-    }finally{
-      await connection.close(con);
     }
   }
 

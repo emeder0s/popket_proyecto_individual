@@ -1,3 +1,4 @@
+const connection = require("../databases/sequelize");
 const bcyptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
@@ -20,12 +21,12 @@ const session = {
   login: async (req, res) => {
     try {
       var con = await connection.open();
-      const { email, user_password } = req.body;
+      const { email, password } = req.body;
       const userM = await userModel.create(con);
       const user = await userM.findOne({ where: { email } });
       if (user) {
           let hashSaved = user.dataValues.user_password;
-          let compare = bcyptjs.compareSync(user_password, hashSaved);
+          let compare = bcyptjs.compareSync(password, hashSaved);
           const infoJwt = jwt.sign({ email, "id": user.dataValues.id, "first_name":user.dataValues.first_name }, "m1c4s4");
           if (compare) {
             res.cookie("session", infoJwt)
@@ -38,7 +39,7 @@ const session = {
         const spacer = await spacerM.findOne({ where: { email } });
         if (spacer) {
             let hashSaved = spacer.dataValues.spacer_password;
-            let compare = bcyptjs.compareSync(spacer_password, hashSaved);
+            let compare = bcyptjs.compareSync(password, hashSaved);
             const infoJwt = jwt.sign({ email, "id": spacer.dataValues.id, "first_name":spacer.dataValues.first_name }, "m1c4s4");
             if (compare) {
                 res.cookie("session", infoJwt)
@@ -71,3 +72,6 @@ const session = {
         }
     }
 }
+
+
+module.exports = session;

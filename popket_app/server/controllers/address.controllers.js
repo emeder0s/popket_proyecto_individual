@@ -14,7 +14,7 @@ const address = {
       var con = await connection.open();
       const addressM = await addressModel.create(con);
       const address = await addressM.create({ via_type, via_name, via_number, additional_address, postal_code, locality, province, country});
-      user.add_address(address.dataValue.id);
+      await user.add_address(req,con,address.dataValues.id);
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -49,7 +49,7 @@ const address = {
       var con = await connection.open();
       const addressM = await addressModel.create(con);
       const address = await addressM.findOne({ where: { id: req.params.id } })
-      res.json(true);
+      res.json(address);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);

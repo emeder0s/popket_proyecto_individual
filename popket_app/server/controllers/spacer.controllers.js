@@ -1,7 +1,7 @@
 const connection = require("../databases/sequelize");
 const spacerModel = require("../models/spacer.model");
 const userModel = require("../models/user.model");
-const session = require("./session.controller");
+const session = require("./session.controllers");
 const bcyptjs = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
@@ -40,7 +40,7 @@ const spacer = {
    */
   edit: async (req, res) => {
     try {
-      let id = spacer.get_id_from_cookie(req);
+      let id = session.get_id_from_cookie(req);
       const { first_name, last_name, phone } = req.body;
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
