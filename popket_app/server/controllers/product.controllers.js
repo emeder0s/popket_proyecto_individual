@@ -10,6 +10,7 @@ const product = {
   new: async (req, res) => {
     try {
       const { product_name, description, price, image, fk_id_space  } = req.body;
+      console.log();
       var con = await connection.open();
       const productM = await productModel.create(con);
       const product = await productM.create({ product_name, description, price, image, fk_id_space })
@@ -47,7 +48,7 @@ const product = {
       var con = await connection.open();
       const productM = await productModel.create(con);
       const product = await productM.findOne({ where: { id: req.params.id } })
-      res.json(true);
+      res.json(product);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);

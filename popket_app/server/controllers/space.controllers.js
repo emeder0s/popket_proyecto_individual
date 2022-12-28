@@ -1,4 +1,5 @@
 const connection = require("../databases/sequelize");
+const session = require("./session.controllers");
 const spaceModel = require("../models/space.model");
 
 const space = {
@@ -10,7 +11,7 @@ const space = {
   new: async (req, res) => {
     try {
       const { name_space, state, description } = req.body;
-      var fk_id_spacer = 1; //AQUÍ HABRÁ QUE RECOGER EL ID DEL SPACE LOGUEADO
+      var fk_id_spacer = session.get_id_from_cookie(req);
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.create({ name_space, state, description, fk_id_spacer })
@@ -31,7 +32,6 @@ const space = {
   edit: async (req, res) => {
     try {
       const { id,name_space, state, description } = req.body;
-      console.log(description);
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.update({ name_space, state, description }, {where :{id}})
