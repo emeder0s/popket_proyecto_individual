@@ -1,6 +1,6 @@
-export const postFetch = async (endPoint, method, data) => {
+export const postFetch = async (endPoint, data) => {
     let metaData = {
-      method: method,
+      method: "POST",
       body: JSON.stringify(data),
       mode: "cors",
       headers: {
@@ -8,7 +8,6 @@ export const postFetch = async (endPoint, method, data) => {
         "Content-type": "application/json",
       },
     };
-  
-    const res = (await fetch(endPoint, metaData)).json();
-    return res;
-  }
+
+    return await fetch(endPoint, metaData);
+}

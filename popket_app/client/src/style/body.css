@@ -1,0 +1,26 @@
+.page-content{
+    position: fixed;
+    top: 80px;
+}
+
+div#root{
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+a:hover{
+    color:darkgrey;
+}
+
+.logo-link{
+    transition: all 0.5s;
+}
+
+.logo-link:hover{
+    color:black;
+    font-size: 20px;
+}

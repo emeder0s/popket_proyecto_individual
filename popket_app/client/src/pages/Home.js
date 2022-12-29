@@ -9,8 +9,7 @@ import '../style/home.css';
 function Home() {
   return (
     <div>
-        <Navigation></Navigation>
-        <div className="page">
+        <div className="content">
             <Intro></Intro>
             <AboutUs></AboutUs>
             <AboutSpaces></AboutSpaces>
