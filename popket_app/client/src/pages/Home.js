@@ -17,8 +17,7 @@ function Home() {
             <BeSpacer></BeSpacer>
             <p>Hola</p>
         </div>
-    </div>
-      
+    </div>   
   );
 }
 
