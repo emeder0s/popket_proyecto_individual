@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 UserSpacerOrderModel = {
     create: async (sequelize) => {
-        const UsersSpacersOrders = sequelize.define("ordersProductss",{
+        const UsersSpacersOrders = sequelize.define("users_spacers_orders",{
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,

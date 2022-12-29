@@ -1,5 +1,9 @@
 const connection = require("../databases/sequelize");
 const orderModel = require("../models/order.model");
+const orderProduct = require("./orders_products.controllers");
+const userSpacerOrder = require ("./users_spacers_orders.controllers")
+const session = require("./session.controllers");
+
 
 const order = {
   /**
@@ -12,7 +16,13 @@ const order = {
       const { num_order, address, total_account, products, quantity } = req.body;
       var con = await connection.open();
       const orderM = await orderModel.create(con);
-      const order = await orderM.create({ num_order, address, total_account })
+      const order = await orderM.create({ num_order, address, total_account });
+      await Promise.all(products.map(async (product, index) =>{
+        await orderProduct.new(product,order.dataValues.id,quantity[index],con);
+        }
+      ));
+      var table = await session.is_user_or_spacer(session.get_email_from_cookie(req),con);
+      await userSpacerOrder.new(session.get_id_from_cookie(req),order.dataValues.id,table, con);
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);

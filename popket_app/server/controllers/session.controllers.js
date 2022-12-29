@@ -13,6 +13,16 @@ const session = {
         return jwtVerify.id
     },
 
+    /**
+     * Devuelve la email del usuario/spacer que tiene sesion iniciada
+     * @param {json} req la petición
+     * @returns {integer}
+     */
+        get_email_from_cookie: (req) => {
+          let jwtVerify = jwt.verify(req.cookies.session, "m1c4s4");
+          return jwtVerify.email
+      },
+
   /**
    * Login del usuario/spacer
    * @param {json} req la petición
@@ -70,7 +80,31 @@ const session = {
         var token = cookies.session;
         res.json(token);
         }
-    }
+    },
+
+  /**
+   * Login del usuario/spacer
+   */
+  is_user_or_spacer: async (email,con) => {
+    try {
+      const userM = await userModel.create(con);
+      const user = await userM.findOne({ where: { email } });
+      if (user) {
+          return "user"
+      } else {
+        const spacerM = await spacerModel.create(con);
+        const spacer = await spacerM.findOne({ where: { email } });
+        if (spacer) {
+            return "spacer"
+        } else {
+           return false;
+        }
+      }
+    } catch (ValidationError) {
+      console.log(ValidationError);
+      return false;
+    } 
+  },
 }
 
 

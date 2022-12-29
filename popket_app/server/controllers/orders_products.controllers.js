@@ -1,38 +1,32 @@
 const connection = require("../databases/sequelize");
-const orderModel = require("../models/order.model");
+const orderProductModel = require("../models/orders_products.model");
 
-const order = {
+const orderProduct = {
   /**
-   * Inserta un order
+   * Inserta un orderProduct
    * @param {json} req La petición
    * @param {json} res Objeto respuesta
    */
-  new: async (req, res) => {
+  new: async (fk_id_product, fk_id_order, quantity, con) => {
     try {
-      const { num_order, address, total_account, products, quantity } = req.body;
-      var con = await connection.open();
-      const orderM = await orderModel.create(con);
-      const order = await orderM.create({ num_order, address, total_account })
-      res.json(true);
+      const orderProductM = await orderProductModel.create(con);
+      const orderProduct = await orderProductM.create({ fk_id_product, fk_id_order, quantity });
     } catch (ValidationError) {
         console.log(ValidationError);
-        res.json(false);
-    }finally{
-      await connection.close(con);
     }
   },
 
   /**
-   * Actualiza los datos de un order 
+   * Actualiza los datos de un orderProduct 
    * @param {*} req la petición
    * @param {*} res la respuesta a la petición
    */
   edit: async (req, res) => {
     try {
-      const { id, num_order, address, total_account, products, quantity } = req.body;
+      const { id, num_orderProduct, address, total_account, products, quantity } = req.body;
       var con = await connection.open();
-      const orderM = await orderModel.create(con);
-      const order = await orderM.update({ num_order, address, total_account }, {where :{id}})
+      const orderProductM = await orderProductModel.create(con);
+      const orderProduct = await orderProductM.update({ num_orderProduct, address, total_account }, {where :{id}})
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -45,9 +39,9 @@ const order = {
   show: async (req, res) => {
     try {
       var con = await connection.open();
-      const orderM = await orderModel.create(con);
-      const order = await orderM.findOne({ where: { id: req.params.id } })
-      res.json(order);
+      const orderProductM = await orderProductModel.create(con);
+      const orderProduct = await orderProductM.findOne({ where: { id: req.params.id } })
+      res.json(orderProduct);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);
@@ -57,15 +51,15 @@ const order = {
   },
   
   /**
-     * Borra un order.
+     * Borra un orderProduct.
      * @param {json} req Objeto solicitud
      * @param {json} res Objeto respuesta
      */
   delete: async (req, res) => {
     try {
       var con = await connection.open();
-      const orderM = await orderModel.create(con);
-      const order = await orderM.destroy({ where: { id:req.params.id } })
+      const orderProductM = await orderProductModel.create(con);
+      const orderProduct = await orderProductM.destroy({ where: { id:req.params.id } })
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -76,4 +70,4 @@ const order = {
   }, 
 }
 
-module.exports = order;
+module.exports = orderProduct;

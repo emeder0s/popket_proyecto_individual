@@ -2,7 +2,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 orderProductModel = {
     create: async (sequelize) => {
-        const OrdersProducts = sequelize.define("ordersProductss",{
+        const OrdersProducts = sequelize.define("orders_products",{
             id: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
