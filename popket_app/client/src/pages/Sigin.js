@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
 import Cookies from 'universal-cookie';
-
+import '../style/body.css';
 
 function Sigin() {
     const cookies = new Cookies();
     const navigate = useNavigate();
     const auth = localStorage.getItem("user");
+    const [msn,setMsn] =  useState("");
 
     const sigin = async e =>{
         e.preventDefault();
@@ -20,7 +21,7 @@ function Sigin() {
                 localStorage.setItem("user",JSON.stringify(res.user))
                 navigate("/");
             }else{
-                console.log("no existe");
+                setMsn(res.msn);
             }
             
         })
@@ -37,6 +38,7 @@ function Sigin() {
                     <input type="tex" name='phone' placeholder='Teléfono' required></input>
                     <input type="password" name='user_password' placeholder='Contraseña' required></input>
                     {/* <input type="password" name='repeat_password' placeholder='Repetir Contraseña' required></input> */}
+                    <p id="error-message">{msn}</p>
                     <button type="submit">Regístrate</button>
                 </form>   
             </div>

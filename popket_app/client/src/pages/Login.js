@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
 import { useContext } from 'react';
 import UserContext from "../components/context/UserContext";
 import Cookies from 'universal-cookie';
+import '../style/body.css';
+import '../style/login.css';
 
 
 function Login() {
     const cookies = new Cookies();
     const auth = localStorage.getItem("user");
     const {user, setUser} = useContext(UserContext);
+    const [msn,setMsn] =  useState("");
 
     const login = async e =>{
         e.preventDefault();
+        document.getElementById("error-message").style.display="none";
         var data = {email:e.target.email.value, password:e.target.password.value};
         await postFetch("/login", data)
         .then((res) => res.json(res))
@@ -22,7 +26,8 @@ function Login() {
                 localStorage.setItem("user",JSON.stringify(res.user))
                 setUser(res.user);
             }else{
-                console.log("no existe");
+                setMsn(res.msn);
+                document.getElementById("error-message").style.display="block";
             }
             
         })
@@ -32,16 +37,15 @@ function Login() {
         <div className="page-content">
             {auth ?
             <div className="form-login">
-                <h4>¡Ya estás logueada!</h4> 
+                <h2>¡Bienvenidx a POPKET!</h2> 
             </div>
             :
             <div className="form-login">
                 <h4>Inicia Sesión, ¡a qué esperas!</h4> 
                 <form onSubmit={login}>
                     <input type="email" name='email' placeholder='Email' required></input>
-                    <br />
                     <input type="password" name='password' placeholder='Contraseña' required></input>
-                    <br />
+                    <p id="error-message" style={{display: "none"}}>{msn}</p>
                     <button type="submit">Log in</button>
                 </form>   
             </div>}
