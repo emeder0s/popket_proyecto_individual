@@ -32,8 +32,8 @@ export const Navigation = () => {
         <Link onClick={handleLogout}>Log out</Link>
       </div> 
       :<div>
-        <NavLink to='/login' className="login-link">Regístrate</NavLink>
-        <NavLink to='/login' className="login-link">Log in</NavLink>
+        <NavLink to='/registro' className="nav-link">Regístrate</NavLink>
+        <NavLink to='/login' className="nav-link">Log in</NavLink>
       </div>}
     </nav>
   )

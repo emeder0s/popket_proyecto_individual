@@ -8,7 +8,6 @@ import Cookies from 'universal-cookie';
 
 function Login() {
     const cookies = new Cookies();
-    const navigate = useNavigate();
     const auth = localStorage.getItem("user");
     const {user, setUser} = useContext(UserContext);
 

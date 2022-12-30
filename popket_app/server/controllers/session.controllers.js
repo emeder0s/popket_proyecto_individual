@@ -42,7 +42,7 @@ const session = {
             res.cookie("session", infoJwt)
             res.json({ validation: true, "jwt": infoJwt, user:user.dataValues });
           } else {
-          res.json({validation:"false",msn:"Ohh!! Usuario o contraseña incorrectos"});
+          res.json({validation:false,msn:"Ohh!! Usuario o contraseña incorrectos"});
            }
       } else {
         const spacerM = await spacerModel.create(con);
@@ -55,10 +55,10 @@ const session = {
                 res.cookie("session", infoJwt)
                 res.json({ validation: true, "jwt": infoJwt, spacer:spacer.dataValues });
             } else {
-            res.json({validation:"false",msn:"Ohh!! Usuario o contraseña incorrectos"});
+            res.json({validation:false,msn:"Ohh!! Usuario o contraseña incorrectos"});
             }
         } else {
-            res.json({validation:"false",msn:"Ohh!! No existe cuenta vinculada a este email"});
+            res.json({validation:false,msn:"Ohh!! No existe cuenta vinculada a este email"});
         }
       }
     } catch (error) {
@@ -106,6 +106,5 @@ const session = {
     } 
   },
 }
-
 
 module.exports = session;

@@ -18,7 +18,7 @@ const spacer = {
       const userM = await userModel.create(con);
       const spacerM = await spacerModel.create(con);
       if (await userM.findOne({ where: { email } }) || await spacerM.findOne({ where: { email } })){
-        res.json({validation:"false",msn:"Ups!! Ya existe una cuenta con este email"});
+        res.json({validation:destroy,msn:"Ups!! Ya existe una cuenta con este email"});
       }else{
         const pass_hash = await bcyptjs.hash(spacer_password, 8);
         const spacer = await spacerM.create({ first_name, last_name, email, phone, spacer_password:pass_hash });
@@ -106,10 +106,10 @@ const spacer = {
             res.cookie("session", infoJwt)
             res.json({ validation: true, "jwt": infoJwt, spacer:spacer.dataValues });
           } else {
-          res.json({validation:"false",msn:"Ohh!! Usuario o contraseña incorrectos"});
+          res.json({validation:false,msn:"Ohh!! Usuario o contraseña incorrectos"});
            }
       } else {
-        res.json({validation:"false",msn:"Ohh!! Usuario o contraseña incorrectos"});
+        res.json({validation:false,msn:"Ohh!! Usuario o contraseña incorrectos"});
       }
     } catch (error) {
       res.json(error)
