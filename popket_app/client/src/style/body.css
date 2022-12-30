@@ -6,6 +6,7 @@
 
 div#root{
     font-family: 'Montserrat', sans-serif;
+    background-color: #fefefe;
 }
 
 a {
@@ -47,4 +48,5 @@ button {
 input{
     border: 1px solid #888a8c;
     border-radius: 5px;
+    background-color: #fefefe;;
 }

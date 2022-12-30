@@ -34,7 +34,7 @@ function Login() {
     }
 
     return(
-        <div className="page-content">
+        <div className="page-content page-content-login">
             {auth ?
             <div className="form-login">
                 <h2>¡Bienvenidx a POPKET!</h2> 
