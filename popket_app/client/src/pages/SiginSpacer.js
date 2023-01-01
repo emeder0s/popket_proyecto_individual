@@ -8,22 +8,24 @@ import '../style/sigin-spacer.css';
 function SiginSpacer() {
     const cookies = new Cookies();
     const navigate = useNavigate();
-    const auth = localStorage.getItem("user");
+    // var auth = localStorage.getItem("user");
+    const [auth, setAuth] = useState(localStorage.getItem("user"));
+    const [space, setSpace] = useState();
     const [msn,setMsn] =  useState("");
 
-    const siginSpacer = async e =>{
+    const siginSpacer = async e => {
         e.preventDefault();
         document.getElementById("error-message").style.display="none";
-        var data = {first_name:e.target.first_name.value,last_name:e.target.last_name.value,email:e.target.email.value,phone:e.target.phone.value, user_password:e.target.user_password.value};
+        var data = {first_name:e.target.first_name.value,last_name:e.target.last_name.value,email:e.target.email.value,phone:e.target.phone.value, spacer_password:e.target.spacer_password.value};
         await postFetch("/register-spacer", data)
         .then((res) => res.json(res))
         .then(res=>{
+            console.log(res);
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user))
-                navigate("/");
+                setAuth(localStorage.getItem("user"));
             }else{
-                console.log(res.msn);
                 setMsn(res.msn);
                 document.getElementById("error-message").style.display="block";
             }
@@ -31,22 +33,70 @@ function SiginSpacer() {
         })
     }
 
+    const createSpace = async e =>{
+        e.preventDefault();
+        // document.getElementById("error-message").style.display="none";
+        var data = {name_space:e.target.name_space.value,state:e.target.state.value,description:e.target.description.value,};
+        await postFetch("/add-space", data)
+        .then((res) => res.json(res))
+        .then(res=>{
+            console.log(res);
+            if(res){
+                setSpace(res);
+                navigate("/");
+            }
+        })
+    }
+
+    fetch("/get-space-by-user")
+    .then((res) => res.json(res))
+    .then(res=>{
+        setSpace(res);
+    })
+
+    
+
     return(
         <div className="page-content page-content-sigin-spacer">
+            {
+                auth ? 
+                <div className="form-container">
+                {space ? 
+                    <div></div>
+                    :
+                    <div className="form-sigin-spacer">
+                    <h3> PASO 2 - ¡Crea tu espacio!</h3> 
+                    <h4>Ponle un nombre bonito y sube tus productos.</h4>
+                    <form onSubmit={createSpace}>
+                        <input type="text" name='name_space' placeholder='Nombre del Espacio' required></input>
+                        <select name='state'>
+                            <option value="draft">Borrador</option>
+                            <option value="publico">Publicado</option>
+                        </select>
+                        <label>Descripción</label>
+                        <textarea  name='description' required></textarea>
+                        <button type="submit">Crear Espacio</button>
+                        <button>Saltar</button>
+                    </form>   
+                </div>
+                }
+                 </div>
+            :
             <div className="form-sigin-spacer">
-                <h3> ¡Regístrate como Spacer!</h3> 
+                <h3> PASO 1 - ¡Regístrate como Spacer!</h3> 
                 <h4>Vende tus creaciones. Hazte Spacer.</h4>
                 <form onSubmit={siginSpacer}>
                     <input type="text" name='first_name' placeholder='Nombre' required></input>
                     <input type="text" name='last_name' placeholder='Apellidos' required></input>
                     <input type="email" name='email' placeholder='Email' required></input>
                     <input type="tex" name='phone' placeholder='Teléfono' required></input>
-                    <input type="password" name='user_password' placeholder='Contraseña' required></input>
+                    <input type="password" name='spacer_password' placeholder='Contraseña' required></input>
                     {/* <input type="password" name='repeat_password' placeholder='Repetir Contraseña' required></input> */}
                     <p id="error-message" style={{display: "none"}}>{msn}</p>
                     <button type="submit">Regístrate</button>
                 </form>   
             </div>
+            }
         </div>
     )
 }

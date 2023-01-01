@@ -15,7 +15,7 @@ const space = {
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.create({ name_space, state, description, fk_id_spacer })
-      res.json(true);
+      res.json(space.dataValues.id);
     } catch (ValidationError) {
         console.log(ValidationError);
         res.json(false);
@@ -76,6 +76,24 @@ const space = {
       await connection.close(con);
     }
   }, 
+
+  /**
+   * Devuelve el id del space de un usuario, si existe. 
+   */
+  getByUser: async (req,res) => {
+    try {
+      var fk_id_spacer = session.get_id_from_cookie(req);
+      var con = await connection.open();
+      const spaceM = await spaceModel.create(con);
+      const space = await spaceM.findOne({where :{fk_id_spacer}})
+      res.json(space.dataValues.id);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+  }
 }
 
 module.exports = space;

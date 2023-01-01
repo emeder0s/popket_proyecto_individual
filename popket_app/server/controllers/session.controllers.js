@@ -40,7 +40,7 @@ const session = {
           const infoJwt = jwt.sign({ email, "id": user.dataValues.id, "first_name":user.dataValues.first_name }, "m1c4s4");
           if (compare) {
             res.cookie("session", infoJwt)
-            res.json({ validation: true, "jwt": infoJwt, user:user.dataValues });
+            res.json({ validation: true, "jwt": infoJwt, user:{first_name:user.dataValues.first_name, id:user.dataValues.id} });
           } else {
           res.json({validation:false,msn:"Ohh!! Usuario o contraseña incorrectos"});
            }
@@ -53,7 +53,7 @@ const session = {
             const infoJwt = jwt.sign({ email, "id": spacer.dataValues.id, "first_name":spacer.dataValues.first_name }, "m1c4s4");
             if (compare) {
                 res.cookie("session", infoJwt)
-                res.json({ validation: true, "jwt": infoJwt, spacer:spacer.dataValues });
+                res.json({ validation: true, "jwt": infoJwt, user:{first_name:spacer.dataValues.first_name, id:spacer.dataValues.id} });
             } else {
             res.json({validation:false,msn:"Ohh!! Usuario o contraseña incorrectos"});
             }

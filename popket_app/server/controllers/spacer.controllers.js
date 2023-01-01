@@ -13,7 +13,7 @@ const spacer = {
    */
   new: async (req, res) => {
     try {
-      const { first_name, last_name, email, phone="", spacer_password } = req.body;
+      const { first_name, last_name, email, phone, spacer_password } = req.body;
       var con = await connection.open();
       const userM = await userModel.create(con);
       const spacerM = await spacerModel.create(con);
@@ -23,7 +23,7 @@ const spacer = {
         const pass_hash = await bcyptjs.hash(spacer_password, 8);
         const spacer = await spacerM.create({ first_name, last_name, email, phone, spacer_password:pass_hash });
         const infoJwt = jwt.sign({ email, "id": spacer.dataValues.id, "first_name":spacer.dataValues.first_name }, "m1c4s4");
-        res.json({"jwt":infoJwt, spacer:{"first_name":spacer.dataValues.first_name, "id":spacer.dataValues.id}});
+        res.json({"validation":true,"jwt":infoJwt, user:{first_name:spacer.dataValues.first_name, id:spacer.dataValues.id}});
       }
     } catch (ValidationError) {
         console.log(ValidationError);
