@@ -22,8 +22,9 @@ router.delete("/delete-user/:id",user.delete );//Borra un user
 //SPACER
 router.post("/register-spacer", spacer.new); //Añade un spacer
 router.post("/edit-spacer", spacer.edit); //Modifica un spacer
-router.get("/spacer/:id",spacer.show); //Elimina un spacer
+router.get("/spacer/:id",spacer.show); //Muestra un spacer
 router.delete("/delete-spacer/:id",spacer.delete )//Borra un spacer
+router.get("/is-spacer",spacer.isSpacer); //Devuelve si es spacer
 
 //ADDRESS
 router.post("/new-address", address.new); //Añade una dirección

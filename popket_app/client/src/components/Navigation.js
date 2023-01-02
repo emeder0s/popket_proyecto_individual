@@ -11,7 +11,6 @@ export const Navigation = () => {
   const navigate = useNavigate();
   var auth = checkAuth();
   var user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
   
   function handleLogout(){
     fetch('/logout')

@@ -117,6 +117,26 @@ const spacer = {
     } finally {
       await connection.close(con);
     }
+  },
+
+  /**
+   * Devuelve si el usuario logueado es spacer o no
+   * @param {json} req la petición
+   * @param {json} res la respuesta a la petición
+   */
+  isSpacer: async (req,res) => {
+    try{
+      var email = session.get_email_from_cookie(req);
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const spacer = await spacerM.findOne({where :{email}});
+      res.json(spacer.dataValues);
+    } catch (error) {
+      res.json(error)
+   
+    } finally {
+      await connection.close(con);
+    }
   }
 }
 

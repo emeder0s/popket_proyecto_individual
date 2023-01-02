@@ -14,7 +14,6 @@ app.use(express.urlencoded({extended: true}));
 // Rutas estáticas
 app.use(express.static("./views"));
 
-
 // Uso de rutas
 app.use("/", router);
 
