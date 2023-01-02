@@ -1,0 +1,16 @@
+ul li {
+    list-style:none;
+    margin:16px;
+}
+
+ul li:hover {
+    color:darkgrey;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+ul.all-users li.active{
+    font-weight: 500;
+    font-size: 18px;
+}

@@ -6,6 +6,8 @@ const address = require("../controllers/address.controllers");
 const space = require("../controllers/space.controllers");
 const product = require("../controllers/product.controllers");
 const order = require("../controllers/order.controllers");
+// const multer  = require('multer');
+// const upload = multer({ dest: './uploads/' });
 
 //SESSION
 router.post("/login", session.login); //Login
@@ -37,7 +39,7 @@ router.delete("/delete-space/:id",space.delete )//Borra un space
 router.get("/get-space-by-user",space.getByUser)//Devuelve el id del space
 
 //PRODUCTS
-router.post("/new-product", product.new); //Añade un space
+// router.post("/new-product", upload.single("image"), product.new); //Añade un space
 router.post("/edit-product", product.edit); //Modifica un space
 router.get("/product/:id",product.show); //Elimina un space
 router.delete("/delete-product/:id",product.delete )//Borra un space

@@ -30,7 +30,7 @@ export const Navigation = () => {
       <NavLink to='/' className="logo-link"><h1>POPKET</h1></NavLink>
       {auth ?
       <div>
-        Bienvenida, {user.first_name}
+        Bienvenida, <NavLink to='/mi-cuenta' id="user-name" className="nav-link">{user.first_name}</NavLink>
         <Link onClick={handleLogout}>Log out</Link>
       </div> 
       :<div>
