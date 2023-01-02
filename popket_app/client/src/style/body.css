@@ -48,5 +48,26 @@ button {
 input{
     border: 1px solid #888a8c;
     border-radius: 5px;
-    background-color: #fefefe;;
+    background-color: #fefefe;
+    font-family: 'Montserrat', sans-serif;
+}
+
+select {
+    border: 1px solid #888a8c;
+    border-radius: 5px;
+    background-color: #fefefe;
+    padding:6px;
+    color: grey;
+    font-family: 'Montserrat', sans-serif;
+}
+select option{
+    padding:6px;
+}
+
+textarea{
+    border: 1px solid #888a8c;
+    border-radius: 5px;
+    background-color: #fefefe;
+    padding:6px;
+    font-family: 'Montserrat', sans-serif;
 }

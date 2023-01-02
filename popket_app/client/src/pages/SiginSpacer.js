@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
+import { checkAuth } from '../helpers/checkAuth';
 import Cookies from 'universal-cookie';
 import '../style/body.css';
 import '../style/sigin-spacer.css';
@@ -8,8 +9,7 @@ import '../style/sigin-spacer.css';
 function SiginSpacer() {
     const cookies = new Cookies();
     const navigate = useNavigate();
-    // var auth = localStorage.getItem("user");
-    const [auth, setAuth] = useState(localStorage.getItem("user"));
+    const [auth, setAuth] = useState(checkAuth());
     const [space, setSpace] = useState();
     const [msn,setMsn] =  useState("");
 
@@ -20,7 +20,6 @@ function SiginSpacer() {
         await postFetch("/register-spacer", data)
         .then((res) => res.json(res))
         .then(res=>{
-            console.log(res);
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user))
@@ -36,11 +35,10 @@ function SiginSpacer() {
     const createSpace = async e =>{
         e.preventDefault();
         // document.getElementById("error-message").style.display="none";
-        var data = {name_space:e.target.name_space.value,state:e.target.state.value,description:e.target.description.value,};
+        var data = {name_space:e.target.name_space.value,state:e.target.state.value,description:e.target.description.value};
         await postFetch("/add-space", data)
         .then((res) => res.json(res))
         .then(res=>{
-            console.log(res);
             if(res){
                 setSpace(res);
                 navigate("/");
@@ -54,8 +52,6 @@ function SiginSpacer() {
         setSpace(res);
     })
 
-    
-
     return(
         <div className="page-content page-content-sigin-spacer">
             {
@@ -68,15 +64,13 @@ function SiginSpacer() {
                     <h3> PASO 2 - ¡Crea tu espacio!</h3> 
                     <h4>Ponle un nombre bonito y sube tus productos.</h4>
                     <form onSubmit={createSpace}>
-                        <input type="text" name='name_space' placeholder='Nombre del Espacio' required></input>
+                        <input type="text" name='name_space' placeholder='Nombre del espacio' required></input>
+                        <textarea  name='description'  placeholder="Cuentanos algo sobre tu espacio..." required></textarea>
                         <select name='state'>
                             <option value="draft">Borrador</option>
                             <option value="publico">Publicado</option>
                         </select>
-                        <label>Descripción</label>
-                        <textarea  name='description' required></textarea>
-                        <button type="submit">Crear Espacio</button>
-                        <button>Saltar</button>
+                        <button className="button-space" type="submit">Crear Espacio</button>
                     </form>   
                 </div>
                 }
@@ -91,9 +85,8 @@ function SiginSpacer() {
                     <input type="email" name='email' placeholder='Email' required></input>
                     <input type="tex" name='phone' placeholder='Teléfono' required></input>
                     <input type="password" name='spacer_password' placeholder='Contraseña' required></input>
-                    {/* <input type="password" name='repeat_password' placeholder='Repetir Contraseña' required></input> */}
                     <p id="error-message" style={{display: "none"}}>{msn}</p>
-                    <button type="submit">Regístrate</button>
+                    <button type="submit" className="button-space">Regístrate</button>
                 </form>   
             </div>
             }

@@ -4,6 +4,8 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Sigin from "../pages/Sigin";
 import SiginSpacer from "../pages/SiginSpacer";
+import NewProduct from "../components/newProduct";
+
 
 export const Router = () => {
     return (
@@ -13,6 +15,7 @@ export const Router = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Sigin/>} />
                 <Route path="/registro-spacer" element={<SiginSpacer/>} />
+                <Route path="/añadir-producto" element={<NewProduct/>} />
             </Routes>
         </div>
     )

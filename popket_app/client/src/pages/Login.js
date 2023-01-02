@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
+import { checkAuth } from '../helpers/checkAuth';
 import { useContext } from 'react';
 import UserContext from "../components/context/UserContext";
 import Cookies from 'universal-cookie';
@@ -10,7 +11,7 @@ import '../style/login.css';
 
 function Login() {
     const cookies = new Cookies();
-    const auth = localStorage.getItem("user");
+    var auth = checkAuth();
     const {user, setUser} = useContext(UserContext);
     const [msn,setMsn] =  useState("");
 
