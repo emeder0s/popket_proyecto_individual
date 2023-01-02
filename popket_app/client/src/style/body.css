@@ -35,6 +35,15 @@ p#error-message {
     border-radius: 8px;
 }
 
+p#sucess-message {
+    font-size: 12px;
+    background: #05b73a;
+    text-align: center;
+    padding: 8px 0px;
+    border-radius: 8px;
+    color:whitesmoke;
+}
+
 button {
     background: #444444;
     border: none;
