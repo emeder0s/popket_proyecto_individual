@@ -21,7 +21,6 @@ function Address(props) {
         .then((res) => res.json(res))
         .then(res=>{
             setAddress(res);
-            console.log(res);
         }) 
     }
     useEffect(()=>{getAddress()},[]);

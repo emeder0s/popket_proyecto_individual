@@ -54,6 +54,42 @@ const spacer = {
     }
   },
 
+  /**
+   * Actualiza la contraseña de un spacer 
+   * @param {*} req la petición
+   * @param {*} res la respuesta a la petición
+   */
+  editPassword: async (req, res) => {
+    try {
+      let id = session.get_id_from_cookie(req);
+      const { old_password,new_password,repeat_password} = req.body;
+      var con = await connection.open();
+      const spacerM = await spacerModel.create(con);
+      const spacer = await spacerM.findOne({ where: { id } });
+      if (spacer) {
+        let hashSaved = spacer.dataValues.spacer_password;
+        if(bcyptjs.compareSync(old_password, hashSaved) ){
+          if(new_password==repeat_password) {
+            const spacer_password = await bcyptjs.hash(new_password, 8);
+            await spacerM.update({ spacer_password }, {where :{id}});
+            res.json({validation:true,msn:"Contraseña actualizada correctamente"}) 
+          } else{
+            res.json({validation:false,msn:"Las contraseñas no coinciden"});
+          }
+        }else{
+          res.json({validation:false,msn:"La contraseña actual no es correcta"});
+        }
+      }else{
+        res.json({validation:false,msn:"El usuario no existe"});
+      }
+    } catch (ValidationError) {
+        console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+  },
+
   show: async (req, res) => {
     try {
       var con = await connection.open();

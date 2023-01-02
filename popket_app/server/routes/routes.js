@@ -16,12 +16,14 @@ router.get("/logout", session.logout); //Logout
 //USER
 router.post("/register", user.new); //Añade un user
 router.post("/edit-user", user.edit); //Modifica un user
+router.post("/edit-user-password", user.editPassword); //Modifica la contrañsea de un usuario
 router.get("/user/:id",user.show); //Elimina un user
 router.delete("/delete-user/:id",user.delete );//Borra un user
 
 //SPACER
 router.post("/register-spacer", spacer.new); //Añade un spacer
 router.post("/edit-spacer", spacer.edit); //Modifica un spacer
+router.post("/edit-spacer-password", spacer.editPassword); //Modifica la contrañsea de un spacer
 router.get("/spacer/:id",spacer.show); //Muestra un spacer
 router.delete("/delete-spacer/:id",spacer.delete )//Borra un spacer
 router.get("/is-spacer",spacer.isSpacer); //Devuelve si es spacer
