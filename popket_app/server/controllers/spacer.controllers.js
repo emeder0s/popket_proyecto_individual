@@ -137,7 +137,24 @@ const spacer = {
     } finally {
       await connection.close(con);
     }
+  },
+
+  /**
+   * Añade el id de una dirección a un usuario
+   * @param {int} fk_id_address el identificador de la dirección del usuario
+   */
+  add_address: async (req,con,fk_id_address) => {
+    try {
+      let id = session.get_id_from_cookie(req);
+      console.log(id);
+      console.log(fk_id_address);
+      const spacerM = await spacerModel.create(con);
+      await spacerM.update({ fk_id_address}, {where :{id}})
+    } catch (ValidationError) {
+        console.log(ValidationError);
+    }
   }
+
 }
 
 module.exports = spacer;

@@ -46,9 +46,9 @@ function MyAccount() {
             </div>
             <div className="sidebar-content">
                 {activeContent == "personal-data" ? <div id="personal-data-content" className="personal-data" ><PersonalDataForm isSpacer={viewIsSpacer}></PersonalDataForm></div> : ""}
-                {activeContent == "address" ? <div id="address-content" className="address" ><AddressForm></AddressForm></div> : ""}
-                {activeContent == "password" ? <div id="password-content" className="password"><PasswordForm></PasswordForm></div> : ""}
-                {activeContent == "orders" ? <div id="orders-content"className="orders" ><Orders></Orders></div> : ""}     
+                {activeContent == "address" ? <div id="address-content" className="address" ><AddressForm isSpacer={viewIsSpacer}></AddressForm></div> : ""}
+                {activeContent == "password" ? <div id="password-content" className="password"><PasswordForm isSpacer={viewIsSpacer}></PasswordForm></div> : ""}
+                {activeContent == "orders" ? <div id="orders-content"className="orders" ><Orders isSpacer={viewIsSpacer}></Orders></div> : ""}     
             </div>
         </div>
     )
