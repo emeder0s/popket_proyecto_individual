@@ -67,7 +67,18 @@ const orderProduct = {
     }finally{
       await connection.close(con);
     }
-  }, 
+  },
+
+  getByOrder: async (fk_id_order,con) => {
+    try {
+      const orderProductM = await orderProductModel.create(con);
+      const orderProducts = await orderProductM.findAll({ where: { fk_id_order } })
+       return orderProducts;
+    } catch (ValidationError) {
+        console.log(ValidationError);
+        return 
+    }
+  },
 }
 
 module.exports = orderProduct;

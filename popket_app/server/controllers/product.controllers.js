@@ -1,5 +1,6 @@
 const connection = require("../databases/sequelize");
 const productModel = require("../models/product.model");
+const orderProduct = require("./orders_products.controllers");
 
 const product = {
   /**
@@ -75,6 +76,19 @@ const product = {
     }
   },
 
+  getByOrder: async(fk_id_order,con) => {
+    var orderProducts = await orderProduct.getByOrder(fk_id_order,con);
+    if (orderProducts){
+      const productM = await productModel.create(con);
+      const products = await Promise.all(orderProducts.map(async element =>{
+        var product = await productM.findOne({ where: { id:element.dataValues.fk_id_product } });
+        return {product, quantity:element.dataValues.quantity}
+      }));
+      return products;
+    }else{
+      return [];
+    }
+  }
 }
 
 module.exports = product;

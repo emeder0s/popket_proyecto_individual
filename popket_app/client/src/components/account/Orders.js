@@ -38,14 +38,18 @@ function Orders(props) {
                                 <div className="order-state" key={`order-state-${i}`}>Estado del pedido: Enviado</div>
                             </div>
                         </div>
-                        <div className="product" key={`product-${i}`}>
-                            <div className="product-img" key={`product-img-${i}`}></div><div className="product-name" key={`product-name-${i}`}>1x Product Name</div><div className="product-price" key={`product-price-${i}`}> 16.50€</div>
-                        </div>
-                        <div className="total-price" key={`total-price-${i}`}>TOTAL: {order.total_account}</div>
+                        {order.products ? 
+                            order.products.map((element, j) => {
+                             return(
+                                <div className="product" key={`product-${i}-${j}`}>
+                                    <div className="product-img" key={`product-img-${i}-${j}`}></div><div className="product-name" key={`product-name-${i}-${j}`}>{element.quantity} x {element.product.product_name}</div><div className="product-price" key={`product-price-${i}-${j}`}>{element.product.price}</div>
+                                </div>
+                            )})
+                        :""}
+                        <div className="total-price" key={`total-price-${i}`}>TOTAL: {order.total_account}€</div>
                         <div className="separator" key={`separator-${i}`}></div>
                     </div>
-                )})
-                
+                )})    
             :""}
         </div>
     )

@@ -3,6 +3,7 @@ const orderModel = require("../models/order.model");
 const orderProduct = require("./orders_products.controllers");
 const userSpacerOrder = require ("./users_spacers_orders.controllers")
 const session = require("./session.controllers");
+const product = require("./product.controllers");
 
 
 const order = {
@@ -93,7 +94,10 @@ const order = {
         const orderM = await orderModel.create(con);
         const orders = await Promise.all(userSpacerOrders.map(async element =>{
             var order = await orderM.findOne({ where: { id:element.dataValues.fk_id_order } });
-            return order.dataValues;
+            var products = await product.getByOrder(order.dataValues.id,con);
+            order = order.dataValues;
+            order.products = products;
+            return order;
         }));
         res.json(orders);
       }else{
