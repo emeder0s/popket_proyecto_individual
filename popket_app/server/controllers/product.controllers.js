@@ -73,7 +73,8 @@ const product = {
     }finally{
       await connection.close(con);
     }
-  }, 
+  },
+
 }
 
 module.exports = product;

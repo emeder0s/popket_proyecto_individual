@@ -84,6 +84,35 @@ const order = {
       await connection.close(con);
     }
   }, 
+
+  getOrders: async (req,res) => {
+    try{
+      var con = await connection.open();
+      const userSpacerOrders = await userSpacerOrder.getOrders(req,con);
+      if (userSpacerOrders){
+        const orderM = await orderModel.create(con);
+        const orders = await Promise.all(userSpacerOrders.map(async element =>{
+            var order = await orderM.findOne({ where: { id:element.dataValues.fk_id_order } });
+            return order.dataValues;
+        }));
+        res.json(orders);
+      }else{
+        res.json(false)
+      }
+    } catch (ValidationError) {
+      console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+      
+    // const orderM = await orderModel.create(con);
+    // const orders = Promise.all(userSpacerOrders.map(async element =>{
+    //   return element;
+    //   // const order = await orderM.findOne({ where: { id:element } })
+    // }));
+    // console.log(orders)
+  }
 }
 
 module.exports = order;
