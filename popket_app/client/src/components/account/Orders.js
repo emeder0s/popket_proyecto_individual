@@ -1,11 +1,12 @@
 import React, { useEffect, useState }  from "react";
-import { postFetch } from '../../helpers/fetchs';
 import '../../style/body.css';
 import '../../style/my-account.css';
 
 function Orders(props) { 
     const [msn,setMsn] =  useState("");
     const [errorMsn,setErrorMsn] =  useState("");
+    const [orders,setOrders] = useState();
+
     const getOrders = async () => {
         var id_user_spacer = JSON.parse(localStorage.getItem("user")).id;
         var name_table="";
@@ -14,59 +15,38 @@ function Orders(props) {
         .then((res) => res.json(res))
         .then(res=>{
             console.log(res);
-            // if (res.validation){
-            //     setMsn(res.msn);
-            //     document.getElementById("sucess-message").style.display="block";
-            // }else{
-            //     setErrorMsn(res.msn);
-            //     document.getElementById("error-message").style.display="block";
-            // }
+            setOrders(res);
         })
     }
 
     useEffect(()=>{getOrders()},[]);
+
     return(
         <div className="orders-container">
             <h3>Pedidos</h3>
-            <div className="box-order">
-                <div className="general-state">
-                    <div>
-                        <div className="order-num">Núm. Pedido: 2345678</div>
-                        <div className="order-date">Realizado el 23/12/2022</div>
+            {orders ? 
+               orders.map((order, i) => {
+                return(
+                    <div className="box-order" key={`box-order-${i}`}>
+                        <div className="general-state" key={`general-state-${i}`}>
+                            <div key={`div1-${i}`}>
+                                <div className="order-num" key={`order-num-${i}`}>Núm. Pedido: {order.num_order}</div>
+                                <div className="order-date" key={`order-date-${i}`}>Realizado el 23/12/2022</div>
+                                <div className="order-address" key={`order-address-${i}`}>Dirección de envío: {order.address}</div>
+                            </div>
+                            <div key={`div2-${i}`}>
+                                <div className="order-state" key={`order-state-${i}`}>Estado del pedido: Enviado</div>
+                            </div>
+                        </div>
+                        <div className="product" key={`product-${i}`}>
+                            <div className="product-img" key={`product-img-${i}`}></div><div className="product-name" key={`product-name-${i}`}>1x Product Name</div><div className="product-price" key={`product-price-${i}`}> 16.50€</div>
+                        </div>
+                        <div className="total-price" key={`total-price-${i}`}>TOTAL: {order.total_account}</div>
+                        <div className="separator" key={`separator-${i}`}></div>
                     </div>
-                    <div>
-                        <div className="order-state">Estado del pedido: Enviado</div>
-                    </div>
-                </div>
-                <div className="product">
-                    <div className="product-img"></div><div className="product-name">1x Product Name</div><div className="product-price"> 16.50€</div>
-                </div>
-                <div className="product">
-                    <div className="product-img"></div><div className="product-name">1x Product Name</div><div className="product-price"> 16.50€</div>
-                </div>
-                <div className="total-price">TOTAL: 33€</div>
-                <div className="separator"></div>
-            </div>
-
-            <div className="box-order">
-                <div className="general-state">
-                    <div>
-                        <div className="order-num">Núm. Pedido: 2345678</div>
-                        <div className="order-date">Realizado el 23/12/2022</div>
-                    </div>
-                    <div>
-                        <div className="order-state">Estado del pedido: Enviado</div>
-                    </div>
-                </div>
-                <div className="product">
-                    <div className="product-img"></div><div className="product-name">1x Product Name</div><div className="product-price"> 16.50€</div>
-                </div>
-                <div className="product">
-                    <div className="product-img"></div><div className="product-name">1x Product Name</div><div className="product-price"> 16.50€</div>
-                </div>
-                <div className="total-price">TOTAL: 33€</div>
-                <div className="separator"></div>
-            </div>
+                )})
+                
+            :""}
         </div>
     )
 }

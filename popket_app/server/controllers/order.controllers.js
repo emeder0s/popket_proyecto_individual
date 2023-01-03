@@ -105,13 +105,6 @@ const order = {
     }finally{
       await connection.close(con);
     }
-      
-    // const orderM = await orderModel.create(con);
-    // const orders = Promise.all(userSpacerOrders.map(async element =>{
-    //   return element;
-    //   // const order = await orderM.findOne({ where: { id:element } })
-    // }));
-    // console.log(orders)
   }
 }
 
