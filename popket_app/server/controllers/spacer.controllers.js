@@ -166,10 +166,14 @@ const spacer = {
       var con = await connection.open();
       const spacerM = await spacerModel.create(con);
       const spacer = await spacerM.findOne({where :{email}});
-      res.json(spacer.dataValues);
+      if (spacer){
+        res.json(true);
+      }else{
+        console.log("noloes");
+        res.json(false);
+      }
     } catch (error) {
       res.json(error)
-   
     } finally {
       await connection.close(con);
     }

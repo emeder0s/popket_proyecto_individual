@@ -11,6 +11,7 @@ function PersonalDataForm(props) {
     const getUser = async () =>{
         var user_id = JSON.parse(localStorage.getItem("user")).id;
         var endpoint = "";
+        // console.log(props.isSpacer);
         if (props.isSpacer){
             endpoint = "/spacer/"+ user_id;
         }else{

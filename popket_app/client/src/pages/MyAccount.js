@@ -25,9 +25,7 @@ function MyAccount() {
             await fetch("/is-spacer")
             .then((res) => res.json(res))
             .then(res=>{
-                if(res=={}){
-                    setViewIsSpacer(true);
-                }
+                setViewIsSpacer(res);
             });
         }
         checkSpacer();
