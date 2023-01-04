@@ -12,7 +12,11 @@ function ManageProducts(props) {
             setProducts(res);
             console.log(res);
         });
-    },[])
+    },[]);
+
+    const deleteProduct = (id) => {
+        alert(id);
+    }
 
 
     return(
@@ -23,18 +27,24 @@ function ManageProducts(props) {
                     <table className="products-table"> 
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Description</th>
-                                <th>Price</th>
+                                <th>Producto</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Acción</th>
                                 <></>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        <tbody>  
+                            {products.map((product, i) => {
+                                return (
+                                    <tr>
+                                        <td>{product.product_name}</td>
+                                        <td>{product.description}</td>
+                                        <td>{product.price}</td>
+                                        <td> Editar | <a onClick= {()=>{deleteProduct(product.id)}}>Borrar</a></td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
