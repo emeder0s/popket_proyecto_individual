@@ -5,12 +5,15 @@ import '../../style/body.css';
 
 function ManageProducts(props) {
     var [products,setProducts] = useState();
-    useEffect(()=>{
+    const getProducts = () => {
         fetch("/get-products-by-space/"+ props.idSpace)
         .then((res) => res.json(res))
         .then(res=>{
             setProducts(res);
         });
+    }
+    useEffect(()=>{
+        getProducts();
     },[]);
 
     const deleteProduct = (id,name) => {
@@ -19,6 +22,7 @@ function ManageProducts(props) {
                 .then((res) => res.json(res))
                 .then(res=>{
                     console.log(res);
+                    getProducts();
             });
         }
     }
