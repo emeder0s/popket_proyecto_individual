@@ -4,10 +4,13 @@ import { postFetch } from '../../helpers/fetchs';
 import { checkAuth } from '../../helpers/checkAuth';
 import '../../style/body.css';
 
-function NewProduct() {
+function NewProduct(props) {
     var auth = checkAuth();
+    const idSpace= props.idSpace;
     const [space, setSpace] = useState();
     const [image, setImage] = useState();
+    const [product, setProduct] = useState();
+    const [msn,setMsn] =  useState("");
 
     fetch("/get-space-by-user")
     .then((res) => res.json(res))
@@ -17,7 +20,6 @@ function NewProduct() {
 
     const handleImage = (e) => {
         const image = e.target.files[0];
-        console.log( URL.createObjectURL(image));
         setImage(image);
     }
 
@@ -25,7 +27,6 @@ function NewProduct() {
         e.preventDefault();
         var formData = new FormData();
         formData.append("file", image);
-        console.log(space);
         let data = {
             method: "POST",
             body: formData,
@@ -33,30 +34,49 @@ function NewProduct() {
             headers: {id_space:space},
         };
 
-        fetch("/upload", data)
+        fetch("/upload-image", data)
             .then((res) => res.json())
-            .then((res) => {
-                console.log(res);
+            .then(async (res) => {
+                await newProduct(e,res.path)
             });
     }
 
-    const newP = async e =>{
+    const newProduct = async (e,path) =>{
         e.preventDefault();
-        var data = {product_name:e.target.product_name.value,description:e.target.description.value,price:e.target.price.value,image:e.target.image,fk_id_space:space};
+        var data = {product_name:e.target.product_name.value,description:e.target.description.value,price:e.target.price.value,image:path,fk_id_space:space};
         await postFetch("/new-product", data)
-        .then((res) => res.json(res))
-        .then(res=>{
-            if(res){
-                console.log(res);
-            }
-        })
+         .then((res) => res.json(res))
+         .then(res=>{
+             if(res){
+                setMsn("Producto añadido correctamente");
+                setProduct(res)
+                document.getElementById("new-product-form").reset();
+             }
+         })
     }
 
     return(
         <div className="personal-data-form">
             <h4>Añade un producto</h4>
+            
+            {product ? 
+                <div className="view-product">
+                    <div>
+                        <div>
+                            <img className="new-product" src={`http://localhost:5000/uploads/${idSpace}/${product.image}`}></img>
+                        </div>
+                        <div>
+                            <div>Nombre: {product.product_name}</div>
+                            <div>Description: {product.product_name}</div>
+                            <div>Price: {product.product_name}</div>
+                        </div>
+                    </div>
+                    <p id="sucess-message">{msn}</p>
+                    <h5>¿Quieres añadir otro?</h5>
+                </div>
+            :""}
             <div className="new-product">
-                <form onSubmit={uploadImage} encType="multipart/form-data" method="POST">
+                <form id="new-product-form" onSubmit={uploadImage} encType="multipart/form-data" method="POST">
                     <input type="text" name='product_name' placeholder='Nombre del producto' required></input>
                     <textarea name="description" placeholder="Descripción"></textarea> 
                     <input type="text" name="price" placeholder="Precio. Ej: 16.50"></input>

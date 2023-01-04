@@ -2,6 +2,10 @@
     width: 100%;
     position: fixed;
     top: 80px;
+    height: 100vh;
+}
+* {
+    box-sizing: border-box;
 }
 
 div#root{
@@ -79,4 +83,12 @@ textarea{
     background-color: #fefefe;
     padding:6px;
     font-family: 'Montserrat', sans-serif;
+}
+
+a.action{
+    cursor:pointer;
+}
+
+img.new-product {
+    width: 20%;
 }

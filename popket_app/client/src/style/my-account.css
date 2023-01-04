@@ -18,7 +18,7 @@ ul.all-users li.active{
 .page-content-account {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    /*  /* height: 100vh; */; 
 }
 
 .sidebar {
@@ -29,6 +29,8 @@ ul.all-users li.active{
     width: 100%;
     box-shadow: -11px 0px 13px -15px #d6d6d6;
     padding: 30px;
+    height: 85%;
+    overflow-y: scroll;
 }
 
 .personal-data-form form {

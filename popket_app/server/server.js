@@ -30,11 +30,14 @@ app.use(express.urlencoded({extended: true}));
 
 // Uso de rutas
 app.use("/", router);
-app.post("/upload", upload.single("file"), (req, res) => {
+app.post("/upload-image", upload.single("file"), (req, res) => {
     res.json({
         status:true,
         path: req.file.filename
     });
 });
+app.get('/uploads/:id_space/:file', (req, res) => {
+    res.sendFile(`${__dirname}/uploads/${req.params.id_space}/${req.params.file}`);
+  });
 
 app.listen(port, () => console.log(`Server ON: ${port}`));

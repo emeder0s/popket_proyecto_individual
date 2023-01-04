@@ -15,7 +15,7 @@ const product = {
       var con = await connection.open();
       const productM = await productModel.create(con);
       const product = await productM.create({ product_name, description, price, image, fk_id_space })
-      res.json(true);
+      res.json(product);
     } catch (ValidationError) {
         console.log(ValidationError);
         res.json(false);
@@ -32,6 +32,7 @@ const product = {
   edit: async (req, res) => {
     try {
       const { id,product_name, description, price, image } = req.body;
+      console.log(image)
       var con = await connection.open();
       const productM = await productModel.create(con);
       const product = await productM.update({ product_name, description, price, image }, {where :{id}})
@@ -64,6 +65,7 @@ const product = {
      * @param {json} res Objeto respuesta
      */
   delete: async (req, res) => {
+    console.log("holaaaaaaaa");
     try {
       var con = await connection.open();
       const productM = await productModel.create(con);
@@ -103,7 +105,21 @@ const product = {
     }finally{
       await connection.close(con);
     }
-  }
+  },
+
+  getImagesById: async (req, res) => {
+    try {
+      var con = await connection.open();  
+      const { id_space } = req.params
+      const productM = await productModel.create(con)
+      console.log(req.params)
+      res.json(await productM.find({ where: {} }))
+    } catch (ValidationError) {
+        console.log(ValidationError);
+    }finally{
+      await connection.close(con);
+    }
+},
 }
 
 module.exports = product;
