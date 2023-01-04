@@ -1,13 +1,16 @@
 import React, { useState, useEffect }  from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import { checkAuth } from '../helpers/checkAuth';
-import SpaceData from '../components/editspace/SpaceData'
+import SpaceData from '../components/editspace/SpaceData';
 import NewProduct from '../components/editspace/NewProduct'
+import ManageProducts from '../components/editspace/ManageProducts'
+
 import '../style/body.css';
 import '../style/my-account.css';
 
 function EditSpace() {
     var auth = checkAuth();
+    const [space, setSpace] = useState();
     const navigate = useNavigate();
     const [activeContent, setActiveContent] = useState("space");
     const activeLi = (optionId) => {
@@ -28,7 +31,16 @@ function EditSpace() {
                 }
             });
         }
+
+        const getSpace = async () =>{
+            await fetch("/show-space-by-spacer")
+            .then((res) => res.json(res))
+            .then(res=>{
+                setSpace(res);
+            }) 
+        }
         checkSpacer();
+        getSpace();
     },[]);
     
     return(
@@ -42,9 +54,9 @@ function EditSpace() {
                 </ul>
             </div>
             <div className="sidebar-content">
-                {activeContent == "space" ? <div id="space-content" className="space"><SpaceData></SpaceData></div> : ""}
-                {activeContent == "add-product" ? <div id="add-product-content" className="add-product" ><NewProduct></NewProduct></div> : ""}
-                {activeContent == "manage-products" ? <div id="add-product-content" className="manage-products" ><NewProduct></NewProduct></div> : ""}
+                {activeContent == "space" ? <div id="space-content" className="space"><SpaceData space={space}></SpaceData></div> : ""}
+                {activeContent == "add-product" ? <div id="add-product-content" className="add-product" ><NewProduct idSpace={space.id}></NewProduct></div> : ""}
+                {activeContent == "manage-products" ? <div id="add-product-content" className="manage-products" ><ManageProducts idSpace={space.id}></ManageProducts></div> : ""}
             </div>
         </div>
     )

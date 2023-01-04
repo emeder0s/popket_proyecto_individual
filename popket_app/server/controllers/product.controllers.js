@@ -88,6 +88,21 @@ const product = {
     }else{
       return [];
     }
+  },
+
+  getBySpace: async (req, res) => {
+    try {
+      var con = await connection.open();
+      const productM = await productModel.create(con);
+      const products = await productM.findAll({ where: { fk_id_space:req.params.space_id } });
+      console.log(products);
+      res.json(products);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
   }
 }
 

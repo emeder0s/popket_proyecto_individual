@@ -1,53 +1,46 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../../helpers/fetchs';
-import { checkAuth } from '../../helpers/checkAuth';
 import '../../style/body.css';
 
-function NewProduct() {
-    var auth = checkAuth();
-    const [space, setSpace] = useState();
-    const [image, setImage] = useState();
-
-    fetch("/get-space-by-user")
-    .then((res) => res.json(res))
-    .then(res=>{
-        setSpace(res);
-    });
-
-    const imageOnChange = e => {
-        console.log(e.target);
-       setImage(e.target.image.value)
-    }
-
-    const newP = async e =>{
-        e.preventDefault();
-        console.log("entro");
-        var data = {product_name:e.target.product_name.value,description:e.target.description.value,price:e.target.price.value,image:e.target.image,fk_id_space:space};
-        await postFetch("/new-product", data)
+function ManageProducts(props) {
+    var [products,setProducts] = useState();
+    useEffect(()=>{
+        fetch("/get-products-by-space/"+ props.idSpace)
         .then((res) => res.json(res))
         .then(res=>{
-            if(res){
-                console.log(res);
-            }
-        })
-    }
+            setProducts(res);
+            console.log(res);
+        });
+    },[])
+
 
     return(
         <div className="personal-data-form">
-            <h4>Añade un producto</h4>
-            <div className="new-product">
-                <form onSubmit={newP} encType="multipart/form-data">
-                    <input type="text" name='product_name' placeholder='Nombre del producto' required></input>
-                    <textarea name="description" placeholder="Descripción"></textarea> 
-                    <input type="text" name="price" placeholder="Precio. Ej: 16.50"></input>
-                    <p>Sube una imagen del producto</p>
-                    <input type="file" name='image' onChange={imageOnChange}required></input>
-                    <button type="submit">Añadir</button>
-                </form>   
-            </div>
+            <h4>Tus productos</h4>
+            {products ? 
+                <div className="products-container">
+                    <table className="products-table"> 
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <></>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            : <p>Todavía no ha subido ningún producto. Pinché en el menú en Añadir Product</p>}
         </div>
     )
 }
 
-export default NewProduct;
+export default ManageProducts;

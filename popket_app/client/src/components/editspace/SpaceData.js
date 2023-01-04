@@ -3,24 +3,9 @@ import { postFetch } from '../../helpers/fetchs';
 import '../../style/body.css';
 import '../../style/my-account.css';
 
-function SpaceData() { 
-    const [space, setSpace] = useState();
-    // const [viewIsSpacer, setViewIsSpacer] = useState(props.isSpacer);
+function SpaceData(props) { 
+    const space = props.space;
     const [msn,setMsn] =  useState("");
-        
-    const getSpace = async () =>{
-        await fetch("/show-space-by-spacer")
-        .then((res) => res.json(res))
-        .then(res=>{
-            setSpace(res);
-            if (res.state = "draft"){
-                console.log("Borrador");
-            }else {
-                console.log("Publicado");
-            }
-        }) 
-    }
-    useEffect(()=>{getSpace()},[]);
 
     const editData = async e => {
         e.preventDefault();
