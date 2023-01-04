@@ -4,6 +4,7 @@ import { postFetch } from '../../helpers/fetchs';
 import { checkAuth } from '../../helpers/checkAuth';
 import '../../style/body.css';
 
+
 function NewProduct(props) {
     var auth = checkAuth();
     const idSpace= props.idSpace;
@@ -58,22 +59,37 @@ function NewProduct(props) {
     return(
         <div className="personal-data-form">
             <h4>Añade un producto</h4>
-            
-            {product ? 
-                <div className="view-product">
-                    <div>
-                        <div>
-                            <img className="new-product" src={`http://localhost:5000/uploads/${idSpace}/${product.image}`}></img>
-                        </div>
-                        <div>
-                            <div>Nombre: {product.product_name}</div>
-                            <div>Description: {product.product_name}</div>
-                            <div>Price: {product.product_name}</div>
-                        </div>
-                    </div>
-                    <p id="sucess-message">{msn}</p>
-                    <h5>¿Quieres añadir otro?</h5>
+            {product ?
+            <div>
+            <div className="view-product">
+            <div className="edit-container">Editar</div>
+            <div>
+                <div className="img-container">
+                    <img className="new-product" src={`http://localhost:5000/uploads/${idSpace}/${product.image}`}></img>
                 </div>
+                <div>
+                    <table className="inserted-product">
+                        <tbody>
+                            <tr>
+                                <td className="label">Nombre</td>
+                                <td className="value">{product.product_name}</td>
+                            </tr>
+                            <tr>
+                                <td className="label">Descripción</td>
+                                <td className="value">{product.description}</td>
+                            </tr>
+                            <tr>
+                                <td className="label">Precio</td>
+                                <td className="value">{product.price}€</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p id="sucess-message">{msn}</p>
+            </div>
+            <h5>¿Quieres añadir otro?</h5>
+            </div>
             :""}
             <div className="new-product">
                 <form id="new-product-form" onSubmit={uploadImage} encType="multipart/form-data" method="POST">

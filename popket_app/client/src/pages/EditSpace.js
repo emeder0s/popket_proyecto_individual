@@ -4,9 +4,9 @@ import { checkAuth } from '../helpers/checkAuth';
 import SpaceData from '../components/editspace/SpaceData';
 import NewProduct from '../components/editspace/NewProduct'
 import ManageProducts from '../components/editspace/ManageProducts'
-
 import '../style/body.css';
 import '../style/my-account.css';
+import '../style/new-product.css';
 
 function EditSpace() {
     var auth = checkAuth();
