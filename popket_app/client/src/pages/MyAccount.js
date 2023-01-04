@@ -39,11 +39,11 @@ function MyAccount() {
                    <li id="address" className="menu-option" onClick={() => activeLi("address")}>Dirección</li>
                    <li id="password" className="menu-option" onClick={() => activeLi("password")}>Contraseña</li>
                    <li id="orders" className="menu-option" onClick={() => activeLi("orders")}>Pedidos</li> 
-                   {viewIsSpacer ? <li><Link to='/' className="nav-link">Editar Espacio</Link></li> : ""}
+                   {viewIsSpacer ? <li><Link to='/editar-space' className="nav-link">Editar Espacio</Link></li> : ""}
                 </ul>
             </div>
             <div className="sidebar-content">
-                {activeContent == "personal-data" ? <div id="personal-data-content" className="personal-data" ><PersonalDataForm isSpacer={viewIsSpacer}></PersonalDataForm></div> : ""}
+                {activeContent == "personal-data" ? <div id="personal-data-content" className="personal-data"><PersonalDataForm isSpacer={viewIsSpacer}></PersonalDataForm></div> : ""}
                 {activeContent == "address" ? <div id="address-content" className="address" ><AddressForm isSpacer={viewIsSpacer}></AddressForm></div> : ""}
                 {activeContent == "password" ? <div id="password-content" className="password"><PasswordForm isSpacer={viewIsSpacer}></PasswordForm></div> : ""}
                 {activeContent == "orders" ? <div id="orders-content"className="orders" ><Orders isSpacer={viewIsSpacer}></Orders></div> : ""}     

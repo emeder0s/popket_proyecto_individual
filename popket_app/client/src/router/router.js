@@ -5,7 +5,7 @@ import Login from "../pages/Login";
 import Sigin from "../pages/Sigin";
 import SiginSpacer from "../pages/SiginSpacer";
 import MyAccount from "../pages/MyAccount";
-import NewProduct from "../components/newProduct";
+import EditSpace from '../pages/EditSpace';
 
 export const Router = () => {
     return (
@@ -15,7 +15,7 @@ export const Router = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/registro" element={<Sigin/>} />
                 <Route path="/registro-spacer" element={<SiginSpacer/>} />
-                <Route path="/añadir-producto" element={<NewProduct/>} />
+                <Route path="/editar-space" element={<EditSpace/>} />
                 <Route path="/mi-cuenta" element={<MyAccount/>} />
             </Routes>
         </div>

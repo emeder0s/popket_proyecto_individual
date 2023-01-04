@@ -1,11 +1,8 @@
 import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
-import { postFetch } from '../helpers/fetchs';
-import { checkAuth } from '../helpers/checkAuth';
-import { useContext } from 'react';
-import UserContext from "../components/context/UserContext";
-import Cookies from 'universal-cookie';
-import '../style/body.css';
+import { postFetch } from '../../helpers/fetchs';
+import { checkAuth } from '../../helpers/checkAuth';
+import '../../style/body.css';
 
 function NewProduct() {
     var auth = checkAuth();
@@ -37,10 +34,11 @@ function NewProduct() {
     }
 
     return(
-        <div className="page-content">
+        <div className="personal-data-form">
+            <h4>Añade un producto</h4>
             <div className="new-product">
                 <form onSubmit={newP} encType="multipart/form-data">
-                    <input type="text" name='product_name' placeholder='Nombre del product' required></input>
+                    <input type="text" name='product_name' placeholder='Nombre del producto' required></input>
                     <textarea name="description" placeholder="Descripción"></textarea> 
                     <input type="text" name="price" placeholder="Precio. Ej: 16.50"></input>
                     <p>Sube una imagen del producto</p>
