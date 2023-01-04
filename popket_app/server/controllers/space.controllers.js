@@ -103,10 +103,8 @@ const space = {
     * @param {json} res Objeto respuesta
     */
   showBySpacer: async (req,res) => {
-    console.group("holaaaaaaaaaaaaaaaaaaaaaaa");
     try {
       var fk_id_spacer = session.get_id_from_cookie(req);
-      console.log(fk_id_spacer);
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.findOne({where :{fk_id_spacer}})
