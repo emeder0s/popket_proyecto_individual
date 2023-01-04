@@ -31,11 +31,10 @@ const product = {
    */
   edit: async (req, res) => {
     try {
-      const { id,product_name, description, price, image } = req.body;
-      console.log(image)
+      const { id,product_name, description, price } = req.body;
       var con = await connection.open();
       const productM = await productModel.create(con);
-      const product = await productM.update({ product_name, description, price, image }, {where :{id}})
+      const product = await productM.update({ product_name, description, price }, {where :{id}})
       res.json(true);
     } catch (ValidationError) {
         console.log(ValidationError);

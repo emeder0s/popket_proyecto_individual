@@ -6,7 +6,7 @@ import NewProduct from '../components/editspace/NewProduct'
 import ManageProducts from '../components/editspace/ManageProducts'
 import '../style/body.css';
 import '../style/my-account.css';
-import '../style/new-product.css';
+import '../style/edit-space.css';
 
 function EditSpace() {
     var auth = checkAuth();
