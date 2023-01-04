@@ -79,7 +79,9 @@ const space = {
 
   /**
    * Devuelve el id del space de un usuario, si existe. 
-   */
+  * @param {json} req Objeto solicitud
+  * @param {json} res Objeto respuesta
+  */
   getByUser: async (req,res) => {
     try {
       var fk_id_spacer = session.get_id_from_cookie(req);
@@ -87,6 +89,28 @@ const space = {
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.findOne({where :{fk_id_spacer}})
       res.json(space.dataValues.id);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+      res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+  },
+
+  /**
+    * Devuelve un space de una spacer.
+    * @param {json} req Objeto solicitud
+    * @param {json} res Objeto respuesta
+    */
+  showBySpacer: async (req,res) => {
+    console.group("holaaaaaaaaaaaaaaaaaaaaaaa");
+    try {
+      var fk_id_spacer = session.get_id_from_cookie(req);
+      console.log(fk_id_spacer);
+      var con = await connection.open();
+      const spaceM = await spaceModel.create(con);
+      const space = await spaceM.findOne({where :{fk_id_spacer}})
+      res.json(space.dataValues);
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);
