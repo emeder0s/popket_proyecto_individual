@@ -10,6 +10,7 @@ const product = {
    */
   new: async (req, res) => {
     try {
+      console.log(req.body);
       const { product_name, description, price, image, fk_id_space  } = req.body;
       var con = await connection.open();
       const productM = await productModel.create(con);
@@ -95,7 +96,6 @@ const product = {
       var con = await connection.open();
       const productM = await productModel.create(con);
       const products = await productM.findAll({ where: { fk_id_space:req.params.space_id } });
-      console.log(products);
       res.json(products);
     } catch (ValidationError) {
         console.log(ValidationError);

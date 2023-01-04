@@ -10,7 +10,7 @@ import '../style/my-account.css';
 
 function MyAccount() {
     var auth = checkAuth();
-    const [viewIsSpacer, setViewIsSpacer] = useState(false);
+    const [viewIsSpacer, setViewIsSpacer] = useState( JSON.parse(localStorage.getItem("user")).isSpacer);
     const [activeContent, setActiveContent] = useState("personal-data");
     const activeLi = (optionId) => {
         var activeOne = document.getElementsByClassName("menu-option active")[0];
@@ -20,17 +20,6 @@ function MyAccount() {
               setActiveContent(optionId);
           }
     }
-    useEffect(()=>{
-        const checkSpacer = async () =>{
-            await fetch("/is-spacer")
-            .then((res) => res.json(res))
-            .then(res=>{
-                setViewIsSpacer(res);
-            });
-        }
-        checkSpacer();
-    },[]);
-    
     return(
         <div className="page-content page-content-account">
             <div className="sidebar">

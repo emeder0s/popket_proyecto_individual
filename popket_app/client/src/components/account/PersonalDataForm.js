@@ -7,11 +7,12 @@ function PersonalDataForm(props) {
     const [user, setUser] = useState();
     const [viewIsSpacer, setViewIsSpacer] = useState(props.isSpacer);
     const [msn,setMsn] =  useState("");
+    console.log(props.isSpacer);
         
     const getUser = async () =>{
         var user_id = JSON.parse(localStorage.getItem("user")).id;
         var endpoint = "";
-        if (props.isSpacer){
+        if (viewIsSpacer){
             endpoint = "/spacer/"+ user_id;
         }else{
             endpoint = "/user/"+ user_id;
