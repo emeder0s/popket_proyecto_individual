@@ -41,7 +41,8 @@ function SiginSpacer() {
         .then(res=>{
             if(res){
                 setSpace(res);
-                setAddProduct(true);
+                navigate("/editar-space");
+                // setAddProduct(true);
             }
         })
     }
@@ -101,13 +102,13 @@ function SiginSpacer() {
                 </form>   
             </div>
             }
-            {addProduct ? 
+            {/* {addProduct ? 
                 <div className="form-sigin-spacer">
                     <h3> PASO 3 - ¡Añade un producto!</h3> 
                     <h4>Añade una imagen y las características de tu producto</h4>
                     <AddProduct space={space}></AddProduct>
                 </div>
-            :""}
+            :""} */}
         </div>
     )
 }
