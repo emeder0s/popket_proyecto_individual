@@ -66,6 +66,10 @@ input{
     font-family: 'Montserrat', sans-serif;
 }
 
+input:focus{
+ outline: none;
+}
+
 select {
     border: 1px solid #888a8c;
     border-radius: 5px;

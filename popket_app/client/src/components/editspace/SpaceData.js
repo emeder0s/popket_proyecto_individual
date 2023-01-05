@@ -34,7 +34,7 @@ function SpaceData(props) {
                         <option value="draft">Borrador</option>
                         <option value="publico">Publicado</option>
                     </select>
-                    <button type="submit">Guardar</button>
+                    <button className="space-button" type="submit">Guardar</button>
                 </form> 
             </div>
             :""} 

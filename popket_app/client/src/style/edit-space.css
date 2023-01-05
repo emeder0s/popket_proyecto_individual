@@ -77,7 +77,7 @@ table.inserted-product{
     color: #ed7c91;
 }
 
-button {
+button.space-button {
     background-color:#ed7c91;
     color: #fefefe;
     padding: 5px;

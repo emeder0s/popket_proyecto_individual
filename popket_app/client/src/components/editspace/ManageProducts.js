@@ -101,7 +101,7 @@ function ManageProducts(props) {
                     <textarea name="description" placeholder="Descripción" defaultValue={product.description}></textarea> 
                     <input type="text" name="price" placeholder="Precio. Ej: 16.50" defaultValue={product.price}></input>
 
-                    <button type="submit">Editar</button>
+                    <button className="space-button" type="submit">Editar</button>
                 </form> 
                 <br></br>
                 <p className="title">Actualiza la imagen del producto</p>
@@ -110,7 +110,7 @@ function ManageProducts(props) {
                     <div> 
                         <form onSubmit={editImage} encType="multipart/form-data" method="POST">
                             <input type="file" name='image' onChange={handleImage} required></input>
-                            <button type="submit">Actualizar</button>
+                            <button className="space-button" type="submit">Actualizar</button>
                         </form>
                     </div>
                 </div>

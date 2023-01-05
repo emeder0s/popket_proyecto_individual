@@ -17,8 +17,7 @@ function NewProduct(props) {
         fetch("/get-space-by-user")
         .then((res) => res.json(res))
         .then(res=>{
-            console.log(res);
-            setSpace(res);
+            setSpace(res.space_id);
         });
     }
     ,[])
@@ -30,6 +29,7 @@ function NewProduct(props) {
     }
 
     const uploadImage = (e) => {
+        console.log(space);
         e.preventDefault();
         var formData = new FormData();
         formData.append("file", image);
@@ -103,7 +103,7 @@ function NewProduct(props) {
                     <input type="text" name="price" placeholder="Precio. Ej: 16.50"></input>
                     <p>Sube una imagen del producto</p>
                     <input type="file" name='image' onChange={handleImage} required></input>
-                    <button type="submit">Añadir</button>
+                    <button className="space-button" type="submit">Añadir</button>
                 </form>   
             </div>
         </div>
