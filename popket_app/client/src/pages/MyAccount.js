@@ -28,7 +28,7 @@ function MyAccount() {
                    <li id="address" className="menu-option" onClick={() => activeLi("address")}>Dirección</li>
                    <li id="password" className="menu-option" onClick={() => activeLi("password")}>Contraseña</li>
                    <li id="orders" className="menu-option" onClick={() => activeLi("orders")}>Pedidos</li> 
-                   {viewIsSpacer ? <li><Link to='/editar-space' className="nav-link">Editar Espacio</Link></li> : ""}
+                   {viewIsSpacer ? <li><Link to='/editar-space' className="nav-link nav-link-space">Editar Espacio</Link></li> : ""}
                 </ul>
             </div>
             <div className="sidebar-content">

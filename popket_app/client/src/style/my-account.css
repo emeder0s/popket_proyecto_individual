@@ -94,3 +94,7 @@ ul.all-users li.active{
     background-repeat:no-repeat;
     height: 30px;  
 }
+
+.nav-link-space{
+    color: #ed7c91;
+}

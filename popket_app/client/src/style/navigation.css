@@ -24,3 +24,7 @@ nav div a {
 #user-name {
     margin-left: 4px;
 }
+
+.nav-link-margin-right{
+    margin-right: 10px;
+}

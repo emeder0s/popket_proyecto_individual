@@ -29,7 +29,8 @@ export const Navigation = () => {
       <NavLink to='/' className="logo-link"><h1>POPKET</h1></NavLink>
       {auth ?
       <div>
-        Bienvenida, <NavLink to='/mi-cuenta' id="user-name" className="nav-link">{user.first_name}</NavLink>
+        <NavLink to='/espacios' className="nav-link nav-link-margin-right">Espacios</NavLink>
+        <NavLink to='/mi-cuenta' id="user-name" className="nav-link">Cuenta</NavLink>
         <Link onClick={handleLogout}>Log out</Link>
       </div> 
       :<div>
