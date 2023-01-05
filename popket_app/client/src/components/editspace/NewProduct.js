@@ -62,7 +62,7 @@ function NewProduct(props) {
             {product ?
             <div>
             <div className="view-product">
-            <div className="edit-container">Editar</div>
+            {/* <div className="edit-container">Editar</div> */}
             <div>
                 <div className="img-container">
                     <img className="new-product" src={`http://localhost:5000/uploads/${idSpace}/${product.image}`}></img>

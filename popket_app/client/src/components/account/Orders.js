@@ -5,6 +5,7 @@ import '../../style/my-account.css';
 function Orders(props) { 
     const [msn,setMsn] =  useState("");
     const [errorMsn,setErrorMsn] =  useState("");
+    const [noOrderMsn,setNoOrderMsn] =  useState("");
     const [orders,setOrders] = useState();
 
     const getOrders = async () => {
@@ -14,8 +15,11 @@ function Orders(props) {
         await fetch(`/orders/${name_table}/${id_user_spacer}`)
         .then((res) => res.json(res))
         .then(res=>{
-            console.log(res);
-            setOrders(res);
+            if (res.length > 0){
+                setOrders(res);
+            }else{
+                document.getElementById("no-order-message").style.display="block";
+            }     
         })
     }
 
@@ -24,6 +28,7 @@ function Orders(props) {
     return(
         <div className="orders-container">
             <h3>Pedidos</h3>
+            <p id="no-order-message" style={{display: "none"}}>Aún no has realizado ningún pedido</p>
             {orders ? 
                orders.map((order, i) => {
                 return(
@@ -50,7 +55,7 @@ function Orders(props) {
                         <div className="separator" key={`separator-${i}`}></div>
                     </div>
                 )})    
-            :""}
+            : ""}
         </div>
     )
 }

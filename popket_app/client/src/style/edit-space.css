@@ -86,3 +86,16 @@ button {
 p.title {
     font-weight: 500;
 }
+
+.edit-img{
+    width: 200px;
+}
+
+.edit-img-container{
+    display: flex;
+    margin-top: 24px;
+}
+
+.edit-img-container div{
+    margin-left: 30px;
+}

@@ -47,6 +47,7 @@ router.get("/show-space-by-spacer",space.showBySpacer)//Devuelve los datos de un
 //PRODUCTS
 router.post("/new-product", product.new); //Añade un space
 router.post("/edit-product", product.edit); //Modifica un space
+router.post("/edit-product-image", product.editImage); //Edita la foto de un producto
 router.get("/product/:id",product.show); //Elimina un space
 router.delete("/delete-product/:id",product.delete )//Borra un space
 router.get("/get-products-by-space/:space_id",product.getBySpace); // Devuelve todos los productos de un space

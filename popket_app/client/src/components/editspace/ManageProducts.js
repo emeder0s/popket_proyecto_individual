@@ -4,6 +4,7 @@ import { postFetch } from '../../helpers/fetchs';
 import '../../style/body.css';
 
 function ManageProducts(props) {
+    const idSpace= props.idSpace;
     var [products,setProducts] = useState();
     var [product,setProduct] = useState();
     var [image,setImage] = useState();
@@ -50,7 +51,39 @@ function ManageProducts(props) {
     const handleImage = (e) => {
         const image = e.target.files[0];
         setImage(image);
-        console.log(image);
+    }
+
+    const editImage = (e) => {
+        e.preventDefault();
+        var formData = new FormData();
+        formData.append("file", image);
+        let data = {
+            method: "POST",
+            body: formData,
+            mode: "cors",
+            headers: {id_space:idSpace},
+        };
+
+        fetch("/upload-image", data)
+            .then((res) => res.json())
+            .then(async (res) => {
+                console.log();
+                await editOnlyImg(e,res.path)
+            });
+    }
+
+    const editOnlyImg = async (e,path) => {
+        e.preventDefault();
+        var data = {id:product.id,image:path};
+        await postFetch("/edit-product-image", data)
+         .then((res) => res.json(res))
+         .then(res=>{
+             if(res){
+                // setMsn("Producto añadido correctamente");
+                setProduct(res)
+                // document.getElementById("new-product-form").reset();
+             }
+         })
     }
 
     return(
@@ -67,11 +100,18 @@ function ManageProducts(props) {
 
                     <button type="submit">Editar</button>
                 </form> 
-                <p className="title">Actualiza la imagen del producto</p> 
-                <form>
-                    <input type="file" name='image' onChange={handleImage} required></input>
-                    <button type="submit">Actualizar</button>
-                </form> 
+                <br></br>
+                <p className="title">Actualiza la imagen del producto</p>
+                <div className="edit-img-container">
+                    <img className="edit-img" src={`http://localhost:5000/uploads/${idSpace}/${product.image}`}></img>
+                    <div>
+                        
+                        <form onSubmit={editImage} encType="multipart/form-data" method="POST">
+                            <input type="file" name='image' onChange={handleImage} required></input>
+                            <button type="submit">Actualizar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
             </div> 
             :
