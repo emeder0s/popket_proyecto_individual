@@ -14,7 +14,11 @@ function ManageProducts(props) {
         fetch("/get-products-by-space/"+ props.idSpace)
         .then((res) => res.json(res))
         .then(res=>{
-            setProducts(res);
+            if(res.legth > 0){
+                setProducts(res);
+            }
+            
+            console.log(res.length);
         });
     }
     useEffect(()=>{
@@ -143,7 +147,7 @@ function ManageProducts(props) {
                         </tbody>
                     </table>
                 </div>
-            : <p>Todavía no ha subido ningún producto. Pinché en el menú en Añadir Product</p>}
+            : <p>Todavía no has subido ningún producto. Pinché en el menú en Añadir Product</p>}
             </div>
             }
         </div>

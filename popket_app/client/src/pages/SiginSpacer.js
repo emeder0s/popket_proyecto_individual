@@ -1,7 +1,8 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
 import { checkAuth } from '../helpers/checkAuth';
+import  AddProduct  from '../components/sigin/AddProduct';
 import Cookies from 'universal-cookie';
 import '../style/body.css';
 import '../style/sigin-spacer.css';
@@ -11,6 +12,7 @@ function SiginSpacer() {
     const navigate = useNavigate();
     const [auth, setAuth] = useState(checkAuth());
     const [space, setSpace] = useState();
+    const [addProduct, setAddProduct] = useState();
     const [msn,setMsn] =  useState("");
 
     const siginSpacer = async e => {
@@ -27,30 +29,39 @@ function SiginSpacer() {
             }else{
                 setMsn(res.msn);
                 document.getElementById("error-message").style.display="block";
-            }
-            
+            } 
         })
     }
 
     const createSpace = async e =>{
         e.preventDefault();
-        // document.getElementById("error-message").style.display="none";
         var data = {name_space:e.target.name_space.value,state:e.target.state.value,description:e.target.description.value};
         await postFetch("/add-space", data)
         .then((res) => res.json(res))
         .then(res=>{
             if(res){
                 setSpace(res);
-                navigate("/");
+                setAddProduct(true);
             }
         })
     }
 
-    fetch("/get-space-by-user")
-    .then((res) => res.json(res))
-    .then(res=>{
-        setSpace(res);
-    })
+    const getSpaceByUser = () =>{
+        fetch("/get-space-by-user")
+            .then((res) => res.json(res))
+            .then(res=>{
+                setSpace(res.space_id);
+                if (res.validation){
+                    setAddProduct(true);
+                }
+        });
+    }
+
+    useEffect(()=>{
+        if (auth) {
+            getSpaceByUser();  
+        }
+    },[auth]);
 
     return(
         <div className="page-content page-content-sigin-spacer">
@@ -68,7 +79,7 @@ function SiginSpacer() {
                         <textarea  name='description'  placeholder="Cuentanos algo sobre tu espacio..." required></textarea>
                         <select name='state'>
                             <option value="draft">Borrador</option>
-                            <option value="publico">Publicado</option>
+                            <option value="public">Publicado</option>
                         </select>
                         <button className="button-space" type="submit">Crear Espacio</button>
                     </form>   
@@ -90,6 +101,13 @@ function SiginSpacer() {
                 </form>   
             </div>
             }
+            {addProduct ? 
+                <div className="form-sigin-spacer">
+                    <h3> PASO 3 - ¡Añade un producto!</h3> 
+                    <h4>Añade una imagen y las características de tu producto</h4>
+                    <AddProduct space={space}></AddProduct>
+                </div>
+            :""}
         </div>
     )
 }

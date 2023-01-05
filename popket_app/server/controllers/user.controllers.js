@@ -23,7 +23,7 @@ const user = {
         const pass_hash = await bcyptjs.hash(user_password, 8);
         const user = await userM.create({ first_name, last_name, email, phone, user_password:pass_hash });
         const infoJwt = jwt.sign({ email, "id": user.dataValues.id, "first_name":user.dataValues.first_name }, "m1c4s4");
-        res.json({validation:true,"jwt":infoJwt, user:{"first_name":user.dataValues.first_name, "id":user.dataValues.id}});
+        res.json({validation:true,"jwt":infoJwt, user:{first_name:user.dataValues.first_name, id:user.dataValues.id, isSpacer:false}});
       }
     } catch (ValidationError) {
         console.log(ValidationError);

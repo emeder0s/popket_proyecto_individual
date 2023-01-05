@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SpaceBox from "../components/allspaces/SpaceBox";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import '../style/home.css';
 import '../style/all-space.css';
 
@@ -11,8 +11,11 @@ function AllSpaces(){
         fetch("/all-spaces")
         .then((res) => res.json(res))
         .then(res=>{
-            console.log(res);
-            setSpaces(res);
+            if (res.length > 0){
+                setSpaces(res);
+            }else{
+                document.getElementById("no-order-message").style.display="block";
+            }           
         });
     }
 
@@ -20,19 +23,22 @@ function AllSpaces(){
         getSpaces();
     },[]);
 
+    const redirect = () => {
+
+    }
+
 
   return (
     <div className="page-content page-content-all-spaces">
         <div className="search-container"><input placeholder="Buscar un espacio"></input></div>
+        <p id="no-order-message" style={{display: "none"}}>Ups!! Todavía no hay ningún espacio creado. ¿Quieres ser el primero? <NavLink to='/registro-spacer' id="user-name" className="nav-link">Aquí</NavLink></p>
         { spaces ? 
             <div className="spaces">
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
-                <Link to='/mi-cuenta' className="nav-link"><SpaceBox></SpaceBox></Link>
+                {spaces.map((space, i) => {
+                    return (
+                        <Link to={`/space/${space}`} className="nav-link"><SpaceBox space={space}></SpaceBox></Link>
+                    )
+                })}
             </div>
          : ""}
     </div>   

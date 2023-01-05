@@ -12,7 +12,7 @@ const space = {
     try {
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
-      const spaces = await spaceM.findAll()
+      const spaces = await spaceM.findAll({ where: { state:"public" } });
       res.json(spaces);
     } catch (ValidationError) {
         console.log(ValidationError);
@@ -29,7 +29,7 @@ const space = {
    */
   new: async (req, res) => {
     try {
-      const { name_space, state, description } = req.body;
+      var { name_space, state, description } = req.body;
       var fk_id_spacer = session.get_id_from_cookie(req);
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
@@ -107,7 +107,7 @@ const space = {
       var con = await connection.open();
       const spaceM = await spaceModel.create(con);
       const space = await spaceM.findOne({where :{fk_id_spacer}})
-      res.json(space.dataValues.id);
+      res.json({space_id:space.dataValues.id,validation:true});
     } catch (ValidationError) {
         console.log(ValidationError);
       res.json(false);

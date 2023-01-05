@@ -18,12 +18,12 @@ const spacer = {
       const userM = await userModel.create(con);
       const spacerM = await spacerModel.create(con);
       if (await userM.findOne({ where: { email } }) || await spacerM.findOne({ where: { email } })){
-        res.json({validation:destroy,msn:"Ups!! Ya existe una cuenta con este email"});
+        res.json({validation:false,msn:"Ups!! Ya existe una cuenta con este email"});
       }else{
         const pass_hash = await bcyptjs.hash(spacer_password, 8);
         const spacer = await spacerM.create({ first_name, last_name, email, phone, spacer_password:pass_hash });
         const infoJwt = jwt.sign({ email, "id": spacer.dataValues.id, "first_name":spacer.dataValues.first_name }, "m1c4s4");
-        res.json({"validation":true,"jwt":infoJwt, user:{first_name:spacer.dataValues.first_name, id:spacer.dataValues.id}});
+        res.json({"validation":true,"jwt":infoJwt, user:{first_name:spacer.dataValues.first_name, id:spacer.dataValues.id,isSpacer:true}});
       }
     } catch (ValidationError) {
         console.log(ValidationError);
