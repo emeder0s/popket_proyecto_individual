@@ -4,6 +4,25 @@ const spaceModel = require("../models/space.model");
 
 const space = {
   /**
+   * Devuelve todos los spaces
+   * @param {json} req la petición
+   * @param {json} res la respuesta a la petición
+   */
+  getAll: async (req,res) => {
+    try {
+      var con = await connection.open();
+      const spaceM = await spaceModel.create(con);
+      const spaces = await spaceM.findAll()
+      res.json(spaces);
+    } catch (ValidationError) {
+        console.log(ValidationError);
+        res.json(false);
+    }finally{
+      await connection.close(con);
+    }
+  },
+
+  /**
    * Inserta un space
    * @param {json} req La petición
    * @param {json} res Objeto respuesta

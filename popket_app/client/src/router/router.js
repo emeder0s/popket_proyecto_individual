@@ -6,6 +6,7 @@ import Sigin from "../pages/Sigin";
 import SiginSpacer from "../pages/SiginSpacer";
 import MyAccount from "../pages/MyAccount";
 import EditSpace from '../pages/EditSpace';
+import AllSpaces from '../pages/AllSpaces';
 
 export const Router = () => {
     return (
@@ -17,6 +18,7 @@ export const Router = () => {
                 <Route path="/registro-spacer" element={<SiginSpacer/>} />
                 <Route path="/editar-space" element={<EditSpace/>} />
                 <Route path="/mi-cuenta" element={<MyAccount/>} />
+                <Route path="/espacios" element={<AllSpaces/>} />
             </Routes>
         </div>
     )

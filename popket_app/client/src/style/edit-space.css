@@ -68,8 +68,8 @@ table.inserted-product{
 }
 
 .products-table tr:hover{
-    background-color:#f0a2b0;
-    color: #fefefe;
+    background-color:rgb(255, 224, 229);;
+    color: #ed7c91;
 }
 
 .products-table tr.header:hover{

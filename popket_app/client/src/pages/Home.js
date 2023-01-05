@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Navigation from '../components/Navigation';
+import React from "react";
 import Intro from '../components/home/IntroContainer';
 import AboutUs from '../components/home/AboutUsContainer';
 import AboutSpaces from '../components/home/AboutSpacesContainer';
@@ -14,7 +13,6 @@ function Home() {
             <AboutUs></AboutUs>
             <AboutSpaces></AboutSpaces>
             <BeSpacer></BeSpacer>
-            <p>Hola</p>
         </div>
     </div>   
   );

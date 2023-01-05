@@ -1,0 +1,42 @@
+.space-box {
+    width: 215px;
+    margin: 24px;
+    box-shadow: 0px 1px 2px #e4e4e4;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 10px;
+}
+
+.space-box img{
+    width: 100%;
+}
+
+.space-name {
+    text-align: center;
+}
+
+.page-content-all-spaces{
+    background-image: url("../img/paper.jpg");
+    padding: 30px;
+    height: 85%;
+    overflow-y: scroll;
+}
+
+.search-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    height: 30px;
+}
+
+.search-container input:focus {
+    width: 100%;
+    outline: none;
+}
+
+.spaces{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

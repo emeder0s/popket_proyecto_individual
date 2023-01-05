@@ -20,6 +20,10 @@ spaceModel = {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
             fk_id_spacer: {
                 type: DataTypes.INTEGER,
                 allowNull: false

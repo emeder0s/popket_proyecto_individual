@@ -108,4 +108,4 @@ dist
 #Package-lock.json
 package-lock.json
 
-uploads
+server/uploads
