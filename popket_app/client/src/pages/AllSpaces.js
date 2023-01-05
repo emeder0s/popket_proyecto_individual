@@ -36,7 +36,7 @@ function AllSpaces(){
             <div className="spaces">
                 {spaces.map((space, i) => {
                     return (
-                        <Link to={`/space/${space}`} className="nav-link"><SpaceBox space={space}></SpaceBox></Link>
+                        <Link to={`/space/${space.id}`} className="nav-link" key={i}><SpaceBox space={space}></SpaceBox></Link>
                     )
                 })}
             </div>

@@ -42,7 +42,6 @@ function SiginSpacer() {
             if(res){
                 setSpace(res);
                 navigate("/editar-space");
-                // setAddProduct(true);
             }
         })
     }

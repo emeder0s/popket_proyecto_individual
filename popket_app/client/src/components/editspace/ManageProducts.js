@@ -14,8 +14,6 @@ function ManageProducts(props) {
         fetch("/get-products-by-space/"+ props.idSpace)
         .then((res) => res.json(res))
         .then(res=>{
-            console.log(res);
-            console.log(res.length);
             if(res.length > 0){
                 
                 setProducts(res);

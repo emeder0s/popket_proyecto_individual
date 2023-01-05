@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../../helpers/fetchs';
 import { checkAuth } from '../../helpers/checkAuth';
@@ -13,11 +13,16 @@ function NewProduct(props) {
     const [product, setProduct] = useState();
     const [msn,setMsn] =  useState("");
 
-    fetch("/get-space-by-user")
-    .then((res) => res.json(res))
-    .then(res=>{
-        setSpace(res);
-    });
+    useEffect(()=>{
+        fetch("/get-space-by-user")
+        .then((res) => res.json(res))
+        .then(res=>{
+            console.log(res);
+            setSpace(res);
+        });
+    }
+    ,[])
+
 
     const handleImage = (e) => {
         const image = e.target.files[0];
