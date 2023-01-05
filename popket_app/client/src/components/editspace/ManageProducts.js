@@ -26,7 +26,6 @@ function ManageProducts(props) {
             fetch("/delete-product/"+ id, { method: 'DELETE' })
                 .then((res) => res.json(res))
                 .then(res=>{
-                    console.log(res);
                     getProducts();
             });
         }
@@ -67,7 +66,6 @@ function ManageProducts(props) {
         fetch("/upload-image", data)
             .then((res) => res.json())
             .then(async (res) => {
-                console.log();
                 await editOnlyImg(e,res.path)
             });
     }
@@ -79,11 +77,13 @@ function ManageProducts(props) {
          .then((res) => res.json(res))
          .then(res=>{
              if(res){
-                // setMsn("Producto añadido correctamente");
-                setProduct(res)
-                // document.getElementById("new-product-form").reset();
+                setProduct(res);
              }
          })
+    }
+
+    const back = () => {
+        setProduct("");
     }
 
     return(
@@ -104,14 +104,14 @@ function ManageProducts(props) {
                 <p className="title">Actualiza la imagen del producto</p>
                 <div className="edit-img-container">
                     <img className="edit-img" src={`http://localhost:5000/uploads/${idSpace}/${product.image}`}></img>
-                    <div>
-                        
+                    <div> 
                         <form onSubmit={editImage} encType="multipart/form-data" method="POST">
                             <input type="file" name='image' onChange={handleImage} required></input>
                             <button type="submit">Actualizar</button>
                         </form>
                     </div>
                 </div>
+                <div><button onClick={back}>Ver Todos los productos</button></div>
             </div>
             </div> 
             :
