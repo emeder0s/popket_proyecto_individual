@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS users(
         id INT AUTO_INCREMENT NOT NULL,
         first_name VARCHAR(25) NOT NULL, 
         last_name VARCHAR(25) NOT NULL, 
-        email VARCHAR (25) UNIQUE NOT NULL,
+        email VARCHAR (50) UNIQUE NOT NULL,
         phone VARCHAR(15),
         user_password VARCHAR(100) NOT NULL,
         fk_id_address INT,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS users(
         id INT AUTO_INCREMENT NOT NULL,
         first_name VARCHAR(25) NOT NULL, 
         last_name VARCHAR(25) NOT NULL, 
-        email VARCHAR (25) UNIQUE NOT NULL,
+        email VARCHAR (50) UNIQUE NOT NULL,
         phone VARCHAR(15),
         spacer_password VARCHAR(100) NOT NULL,
         fk_id_address INT,
@@ -65,7 +65,9 @@ CREATE TABLE IF NOT EXISTS orders(
         id INT AUTO_INCREMENT NOT NULL,
         num_order VARCHAR(12) UNIQUE NOT NULL, 
         address VARCHAR(500) NOT NULL,
-        total_account VARCHAR(25) NOT NULL, 
+        order_date DATETIME DEFAULT now(),
+        total_account VARCHAR(25) NOT NULL,
+        state VARCHAR(25) NOT NULL,
         PRIMARY KEY(id)
 );
 
@@ -76,7 +78,7 @@ CREATE TABLE IF NOT EXISTS orders_products(
         fk_id_product INT NOT NULL,
         PRIMARY KEY(id),
         FOREIGN KEY (fk_id_order) REFERENCES orders(id) ON DELETE CASCADE,
-        FOREIGN KEY (fk_id_product) REFERENCES products(id) 
+        FOREIGN KEY (fk_id_product) REFERENCES products(id)
 );
 
 CREATE TABLE IF NOT EXISTS users_spacers_orders(
