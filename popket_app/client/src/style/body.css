@@ -89,3 +89,17 @@ textarea{
     padding:6px;
     font-family: 'Montserrat', sans-serif;
 }
+
+.shopping-cart {
+    position: sticky;
+    height: 100vh;
+    margin-top: 80px;
+    width: 40%;
+    background: white;
+    float: right;
+    z-index: 100;
+}
+
+.shopping-cart aside{
+padding: 24px;
+}

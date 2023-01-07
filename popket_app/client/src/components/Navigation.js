@@ -12,6 +12,7 @@ export const Navigation = (props) => {
   var auth = checkAuth();
   var user = JSON.parse(localStorage.getItem("user"));
 
+
   function handleLogout(){
     fetch('/logout')
     .then(res=> res.json())
@@ -24,6 +25,10 @@ export const Navigation = (props) => {
     });
   }
 
+  const handleCart = () => {
+    props.viewCart ? props.setViewCart(false) : props.setViewCart(true);
+  }
+
   return(
     <nav>
       <NavLink to='/' className="logo-link"><h1>POPKET</h1></NavLink>
@@ -32,14 +37,14 @@ export const Navigation = (props) => {
         <NavLink to='/espacios' className="nav-link nav-link-margin-right">Espacios</NavLink>
         <NavLink to='/mi-cuenta' id="user-name" className="nav-link">Cuenta</NavLink>
         <Link onClick={handleLogout}>Log out</Link>
-        <NavLink to='/login' className="nav-link">Carrito ()</NavLink>
+        <Link onClick={handleCart} className="nav-link">Carrito ()</Link>
       </div> 
       :
       <div>
         <NavLink to='/espacios' className="nav-link">Espacios</NavLink>
         <NavLink to='/registro' className="nav-link">Regístrate</NavLink>
         <NavLink to='/login' className="nav-link">Log in</NavLink>
-        <NavLink to='/login' className="nav-link">Carrito ()</NavLink>
+        <Link onClick={handleCart} className="nav-link">Carrito ()</Link>
       </div>}
     </nav>
   )

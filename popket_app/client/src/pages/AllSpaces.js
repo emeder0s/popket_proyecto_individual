@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SpaceBox from "../components/allspaces/SpaceBox";
 import { Link, NavLink } from 'react-router-dom';
+import '../style/body.css';
 import '../style/home.css';
 import '../style/all-space.css';
 
