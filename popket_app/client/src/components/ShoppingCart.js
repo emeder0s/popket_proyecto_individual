@@ -1,9 +1,9 @@
 import {React, useEffect, useState} from "react";
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import { Link,useNavigate } from 'react-router-dom';
 
 function ShoppingCart() {
     const cart = localStorage.getItem("cart");
+    const navigate = useNavigate();
     const [viewCart, setViewCart] = useState();
     const [products, setProducts] = useState();
 
@@ -19,7 +19,16 @@ function ShoppingCart() {
     },[])
 
     const getPrice = (price, quantity) => {
-      return 10
+      return parseFloat(price) * parseInt(quantity)
+    }
+
+    const deleteFromCart = (id) => {
+    
+    }
+
+    const redirect = () => {
+      document.getElementById("nav-link-cart").click();
+      navigate("/order");
     }
 
   return (
@@ -32,13 +41,15 @@ function ShoppingCart() {
                   {products ? 
                     products.map((product, i) => {
                       return (
-                        <div>
-                           <div><img></img></div>
-                           <div>{product.quantity} x {product.product.product_name} - {getPrice(product.product.price,product.quantity)}€</div>
+                        <div className="cart-row" key={`cart-row-${i}`}>
+                           <div key={`img-div-${i}`}><img className="cart-product-img" src={`http://localhost:5000/uploads/${product.product.fk_id_space}/${product.product.image}`}></img></div>
+                           <div className="details-div" key={`details-div-${i}`}>{product.quantity} x {product.product.product_name} - {getPrice(product.product.price,product.quantity)}€</div>
+                           <div className="delete-div" key={`delete-div-${i}`}><Link onClick={() => {deleteFromCart(product.product.id)}} className="nav-link" key={`nav-link-${i}`}>Eliminar</Link></div>
                          </div>
                       )
                  })
                   :""}
+                  {products ? <div><button onClick={redirect}>Tramitar pedido</button></div> : ""}
                   </div>
                :<p>No hay productos en el carrito.</p> }
             </aside>

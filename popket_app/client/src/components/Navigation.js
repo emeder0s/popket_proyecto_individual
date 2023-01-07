@@ -37,14 +37,14 @@ export const Navigation = (props) => {
         <NavLink to='/espacios' className="nav-link nav-link-margin-right">Espacios</NavLink>
         <NavLink to='/mi-cuenta' id="user-name" className="nav-link">Cuenta</NavLink>
         <Link onClick={handleLogout}>Log out</Link>
-        <Link onClick={handleCart} className="nav-link">Carrito ()</Link>
+        <Link onClick={handleCart} className="nav-link" id="nav-link-cart">Carrito ()</Link>
       </div> 
       :
       <div>
         <NavLink to='/espacios' className="nav-link">Espacios</NavLink>
         <NavLink to='/registro' className="nav-link">Regístrate</NavLink>
         <NavLink to='/login' className="nav-link">Log in</NavLink>
-        <Link onClick={handleCart} className="nav-link">Carrito ()</Link>
+        <Link onClick={handleCart} className="nav-link" id="nav-link-cart">Carrito ()</Link>
       </div>}
     </nav>
   )
