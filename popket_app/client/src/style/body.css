@@ -98,6 +98,7 @@ textarea{
     background: white;
     float: right;
     z-index: 100;
+    box-shadow: 10px 18px 15px #5a5a5a;
 }
 
 .shopping-cart aside{

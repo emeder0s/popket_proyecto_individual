@@ -24,13 +24,14 @@ function Product() {
 
     const addProduct = () => {
         var select = document.getElementById("quantity");
-        var cart = JSON.parse(localStorage.getItem("cart"));
+        var cart = localStorage.getItem("cart");
         console.log(cart);
         if (cart) {
+            cart = JSON.parse(cart)
             cart.push({product,quantity:select.options[select.selectedIndex].text});
             localStorage.setItem("cart",JSON.stringify(cart));
         }else{
-            localStorage.setItem("cart",JSON.string[{product,quantity:select.options[select.selectedIndex].text}]);
+            localStorage.setItem("cart",JSON.stringify([{product,quantity:select.options[select.selectedIndex].text}]));
         }
     };
 
