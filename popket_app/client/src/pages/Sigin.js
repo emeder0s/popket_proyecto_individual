@@ -20,7 +20,8 @@ function Sigin() {
         .then(res=>{
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
-                localStorage.setItem("user",JSON.stringify(res.user))
+                localStorage.setItem("user",JSON.stringify(res.user));
+                localStorage.setItem("cart",JSON.stringify([]));
                 navigate("/");
             }else{
                 setMsn(res.msn);

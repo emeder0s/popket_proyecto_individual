@@ -25,6 +25,7 @@ function Login() {
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user))
+                localStorage.setItem("cart",JSON.stringify([]));
                 setUser(res.user);
             }else{
                 setMsn(res.msn);

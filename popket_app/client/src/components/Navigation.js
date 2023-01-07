@@ -6,12 +6,12 @@ import UserContext from "../components/context/UserContext";
 import Cookies from 'universal-cookie';
 import '../style/navigation.css';
 
-export const Navigation = () => {
+export const Navigation = (props) => {
   const cookies = new Cookies();
   const navigate = useNavigate();
   var auth = checkAuth();
   var user = JSON.parse(localStorage.getItem("user"));
-  
+
   function handleLogout(){
     fetch('/logout')
     .then(res=> res.json())
@@ -32,11 +32,14 @@ export const Navigation = () => {
         <NavLink to='/espacios' className="nav-link nav-link-margin-right">Espacios</NavLink>
         <NavLink to='/mi-cuenta' id="user-name" className="nav-link">Cuenta</NavLink>
         <Link onClick={handleLogout}>Log out</Link>
+        <NavLink to='/login' className="nav-link">Carrito ()</NavLink>
       </div> 
-      :<div>
+      :
+      <div>
         <NavLink to='/espacios' className="nav-link">Espacios</NavLink>
         <NavLink to='/registro' className="nav-link">Regístrate</NavLink>
         <NavLink to='/login' className="nav-link">Log in</NavLink>
+        <NavLink to='/login' className="nav-link">Carrito ()</NavLink>
       </div>}
     </nav>
   )

@@ -1,0 +1,39 @@
+.page-content-product .product-container{
+    display: flex;
+    padding: 56px;
+    width: 97%;
+    cursor: auto;
+}
+
+.product-details {
+    padding: 56px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-name {
+    font-size: 32px;
+}
+
+.product-description {
+    text-align: justify;
+}
+
+.product-price {
+    font-size: 24px;
+}
+
+.add-to-cart{
+    width: 100%;
+}
+
+.add-to-cart button {
+    width: 19%;
+}
+
+.product-details div {
+    margin: 8px 0px;
+}
+

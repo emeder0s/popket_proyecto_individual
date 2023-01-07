@@ -7,7 +7,7 @@ import './style/body.css';
 
 function App() {
   const [user, setUser] = useState();
-
+  
   return (
     <div>
       <BrowserRouter>

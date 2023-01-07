@@ -107,7 +107,7 @@ h2.subtitle {
     background-color: #576a789e;
     font-family: 'Montserrat', sans-serif;
     width: 355px;
-    height: 39px;
+    padding: 8px;
     margin: 16px;
     font-size: 17px;
     color: #f4f2f0;

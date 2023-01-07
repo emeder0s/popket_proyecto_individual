@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import '../style/space.css'
 
+
 function Space() {
     const { id } = useParams();
     const [space,setSpace] = useState();
@@ -44,7 +45,7 @@ function Space() {
                         <div className="product-container" key={`product-container-${i}`}>
                             <div className="product-img" key={`product-img-${i}`}>
                                 <img className="product-img" src={`http://localhost:5000/uploads/${id}/${product.image}`} key={`img-${i}`}></img>
-                                </div>
+                            </div>
                             <div className="product-details" key={`product-details-${i}`}>
                                 <div key={`product-name-${i}`}>{product.product_name}</div>
                                 <div key={`product-price-${i}`}>{product.price}€</div>

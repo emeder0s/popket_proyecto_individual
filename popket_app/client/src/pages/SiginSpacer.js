@@ -25,6 +25,7 @@ function SiginSpacer() {
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user))
+                localStorage.setItem("cart",JSON.stringify([]));
                 setAuth(localStorage.getItem("user"));
             }else{
                 setMsn(res.msn);

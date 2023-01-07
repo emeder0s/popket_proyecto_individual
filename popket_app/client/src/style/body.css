@@ -53,10 +53,10 @@ button {
     background: #444444;
     border: none;
     padding: 2% 4%;
-    box-shadow: 2px 1px 4px #8e98a2;
+    /* box-shadow: 2px 1px 4px #8e98a2; */
     color: #fafafa;
     cursor: pointer;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 }
 
 input{
