@@ -36,7 +36,8 @@
 .about-spaces-container div {
     display: flex;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: center;
+    margin-top: 77px;
 }
 
 .about-spaces-container button {
@@ -46,7 +47,7 @@
     color: #ed7c91;
     box-shadow: 2px 1px 4px pink;
     font-family: 'Montserrat', sans-serif;
-    margin-right: 76px;
+    margin-right: 15px;
     font-weight: 600;
 }
 
@@ -64,7 +65,7 @@
 
 .about-spaces-container h2{
     font-size: 324%;
-    margin-top: 53px;
+    margin-top: 122px;
     color: white;
 }
 
@@ -105,7 +106,7 @@ h2.subtitle {
 .intro-container button {
     background-color: #576a789e;
     font-family: 'Montserrat', sans-serif;
-    width: 257px;
+    width: 355px;
     height: 39px;
     margin: 16px;
     font-size: 17px;

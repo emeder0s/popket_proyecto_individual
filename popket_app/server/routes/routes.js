@@ -39,7 +39,7 @@ router.get("/get-address-by-user/:id",address.getByUser);//Devuelve la direcció
 //SPACES
 router.post("/add-space", space.new); //Añade un space
 router.post("/edit-space", space.edit); //Modifica un space
-router.get("/show/:id",space.show); //Elimina un space
+router.get("/space/:id",space.show); //Elimina un space
 router.delete("/delete-space/:id",space.delete ) //Borra un space
 router.get("/get-space-by-user",space.getByUser) //Devuelve el id del space
 router.get("/show-space-by-spacer",space.showBySpacer) //Devuelve los datos de un space

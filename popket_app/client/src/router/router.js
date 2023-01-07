@@ -7,6 +7,8 @@ import SiginSpacer from "../pages/SiginSpacer";
 import MyAccount from "../pages/MyAccount";
 import EditSpace from '../pages/EditSpace';
 import AllSpaces from '../pages/AllSpaces';
+import Space from '../pages/Space';
+import Product from '../pages/Product';
 
 export const Router = () => {
     return (
@@ -19,6 +21,8 @@ export const Router = () => {
                 <Route path="/editar-space" element={<EditSpace/>} />
                 <Route path="/mi-cuenta" element={<MyAccount/>} />
                 <Route path="/espacios" element={<AllSpaces/>} />
+                <Route path="/espacio/:id" element={<Space/>} />
+                <Route path="/producto/:id" element={<Product/>} />
             </Routes>
         </div>
     )
