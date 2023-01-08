@@ -61,7 +61,7 @@ button {
 
 input{
     border: 1px solid #888a8c;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     background-color: #fefefe;
     font-family: 'Montserrat', sans-serif;
 }
@@ -72,7 +72,7 @@ input:focus{
 
 select {
     border: 1px solid #888a8c;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     background-color: #fefefe;
     padding:6px;
     color: grey;

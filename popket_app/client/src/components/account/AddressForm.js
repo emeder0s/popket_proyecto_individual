@@ -21,6 +21,10 @@ function Address(props) {
         .then((res) => res.json(res))
         .then(res=>{
             setAddress(res);
+            if(res){
+                console.log( document.getElementById("via_type"));
+                document.getElementById("via_type").value = res.via_type;
+            }
         }) 
     }
     useEffect(()=>{getAddress()},[]);
@@ -64,7 +68,7 @@ function Address(props) {
                 <h4>Edita tu dirección</h4>
                 <p id="sucess-message" style={{display: "none"}}>{msn}</p>
                 <form onSubmit={editData}>
-                    <select name='via_type'>
+                    <select id='via_type' name='via_type'>
                     {viaTypes.map((viaType, i) => {
                         return(<option  key={i} value={viaType}>{viaType}</option>)
                     })}

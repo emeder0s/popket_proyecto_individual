@@ -9,7 +9,8 @@ function ShoppingCart() {
 
 
     useEffect(()=>{
-      if (cart == null)
+      console.log();
+      if (cart == null || cart.length < 0)
       {
         setViewCart(false);
       }else{
@@ -22,8 +23,13 @@ function ShoppingCart() {
       return parseFloat(price) * parseInt(quantity)
     }
 
-    const deleteFromCart = (id) => {
-    
+    const deleteFromCart = (pos) => {
+      var removed = products.splice(pos, 1);
+      localStorage.setItem("cart",JSON.stringify(products));
+      setProducts(products);
+      if(!products.length > 0){
+        setViewCart(false);
+      }
     }
 
     const redirect = () => {
@@ -44,14 +50,14 @@ function ShoppingCart() {
                         <div className="cart-row" key={`cart-row-${i}`}>
                            <div key={`img-div-${i}`}><img className="cart-product-img" src={`http://localhost:5000/uploads/${product.product.fk_id_space}/${product.product.image}`}></img></div>
                            <div className="details-div" key={`details-div-${i}`}>{product.quantity} x {product.product.product_name} - {getPrice(product.product.price,product.quantity)}€</div>
-                           <div className="delete-div" key={`delete-div-${i}`}><Link onClick={() => {deleteFromCart(product.product.id)}} className="nav-link" key={`nav-link-${i}`}>Eliminar</Link></div>
+                           <div className="delete-div" key={`delete-div-${i}`}><Link onClick={() => {deleteFromCart(i)}} className="nav-link" key={`nav-link-${i}`}>Eliminar</Link></div>
                          </div>
                       )
                  })
                   :""}
-                  {products ? <div><button onClick={redirect}>Tramitar pedido</button></div> : ""}
+                  {viewCart ? <div><button onClick={redirect}>Tramitar pedido</button></div> : ""}
                   </div>
-               :<p>No hay productos en el carrito.</p> }
+               : <p>No hay productos en el carrito.</p> }
             </aside>
         </div>
     </div>
