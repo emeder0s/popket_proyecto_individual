@@ -26,6 +26,14 @@ function Orders(props) {
 
     useEffect(()=>{getOrders()},[]);
 
+    const formatDate = (date) => {
+        var time = date.split("T")[1];
+        time = time.split(".")[0];
+        date = date.split("T")[0];
+        
+        return date +' '+ time;
+    }
+
     return(
         <div className="orders-container">
             <h3>Pedidos</h3>
@@ -37,18 +45,18 @@ function Orders(props) {
                         <div className="general-state" key={`general-state-${i}`}>
                             <div key={`div1-${i}`}>
                                 <div className="order-num" key={`order-num-${i}`}>Núm. Pedido: {order.num_order}</div>
-                                <div className="order-date" key={`order-date-${i}`}>Realizado el 23/12/2022</div>
+                                <div className="order-date" key={`order-date-${i}`}>Realizado el {formatDate(order.order_date)}</div>
                                 <div className="order-address" key={`order-address-${i}`}>Dirección de envío: {order.address}</div>
                             </div>
                             <div key={`div2-${i}`}>
-                                <div className="order-state" key={`order-state-${i}`}>Estado del pedido: Enviado</div>
+                                <div className="order-state" key={`order-state-${i}`}>Estado: {order.state}</div>
                             </div>
                         </div>
                         {order.products ? 
                             order.products.map((element, j) => {
                              return(
                                 <div className="product" key={`product-${i}-${j}`}>
-                                    <div className="product-img" key={`product-img-${i}-${j}`}></div><div className="product-name" key={`product-name-${i}-${j}`}>{element.quantity} x {element.product.product_name}</div><div className="product-price" key={`product-price-${i}-${j}`}>{element.product.price}</div>
+                                    <div className="product-img-account" key={`product-img-${i}-${j}`}><img className="product-image-account" key={`product-image-account-${i}-${j}`} src={`http://localhost:5000/uploads/${element.product.fk_id_space}/${element.product.image}`}></img></div><div className="product-name-account" key={`product-name-${i}-${j}`}>{element.quantity} x {element.product.product_name}</div><div className="product-price-account" key={`product-price-${i}-${j}`}>{element.product.price}€</div>
                                 </div>
                             )})
                         :""}

@@ -42,10 +42,20 @@ ul.all-users li.active{
     margin-bottom:16px;
 }
 
-.product-img{
+.product-img-account{
     background-color: #cba191;
     width: 70px;
     height: 70px;
+    margin-right: 20px;
+}
+.product-image-account{
+    width: 70px;
+    height: 70px;
+    
+}
+
+.product-name-account{
+    margin-right: 20px;
 }
 
 .product{
