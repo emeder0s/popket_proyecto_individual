@@ -3,6 +3,13 @@
     /* background-color:#fefefe; */
     height: 85%;
     overflow-y: scroll;
+}
+
+.page-content-order-done{
+    padding:56px 168px;
+    /* background-color:#fefefe; */
+    height: 85%;
+    overflow-y: scroll;
     background: url("../img/intro.jpg") no-repeat center top;
 }
 

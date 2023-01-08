@@ -52,8 +52,8 @@ function Product() {
     <div className="page-content page-content-product">
         {product ?
             <div className="product-container">
-                <div className="product-img-account">
-                    <img className="product-img-account" src={`http://localhost:5000/uploads/${product.fk_id_space}/${product.image}`}></img>
+                <div className="product-page-img">
+                    <img className="product-page-img" src={`http://localhost:5000/uploads/${product.fk_id_space}/${product.image}`}></img>
                 </div>
                 <div className="product-details">
                     <div className="product-name">{product.product_name} {favorite ? <a className="make-favorite" onClick={deleteFavorite} title="Elimina de Favoritos"><AiFillHeart/></a>:<a className="make-favorite" onClick={saveFavorite} title="Añade a Favoritos"><AiOutlineHeart/></a>}</div>

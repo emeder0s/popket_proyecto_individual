@@ -11,7 +11,7 @@ function OrderDone(){
     }
 
   return (
-    <div className="page-content page-content-order">
+    <div className="page-content page-content-order-done">
         {order ?
         <div>
             <div className="order-details-container">
