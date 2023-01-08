@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS orders_requests(
         id INT AUTO_INCREMENT NOT NULL,
         fk_id_order INT NOT NULL,
         fk_id_space INT NOT NULL,
+        state VARCHAR(50) NOT NULL,
         PRIMARY KEY(id),
         FOREIGN KEY (fk_id_order) REFERENCES orders(id) ON DELETE CASCADE,
         FOREIGN KEY (fk_id_space) REFERENCES spaces(id)

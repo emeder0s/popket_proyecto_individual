@@ -1,5 +1,6 @@
 const connection = require("../databases/sequelize");
 const orderRequestModel = require("../models/orders_requests.model");
+const space = require("./space.controllers");
 
 const orderRequest = {
   /**
@@ -11,12 +12,23 @@ const orderRequest = {
     try {
       const orderRequestM = await orderRequestModel.create(con);
       await Promise.all(spaces.map(async(fk_id_space) => {
-          await orderRequestM.create({ fk_id_space, fk_id_order })
+          await orderRequestM.create({ fk_id_space, fk_id_order,state:"pending" })
       }))
     } catch (ValidationError) {
         console.log(ValidationError);
     }
   },
+
+  /**
+   * Devuelve las peticiones space
+   * @param {json} req La petición
+   * @param {json} res Objeto respuesta
+   */
+    getBySpace: async (fk_id_space,con) => {
+        const orderRequestM = await orderRequestModel.create(con);
+        const ordersRequests = await orderRequestM.findAll({ where: { fk_id_space, state:"pending" } });
+        return ordersRequests;
+  }
 
   // /**
   //  * Actualiza los datos de un orderRequest 
@@ -70,17 +82,6 @@ const orderRequest = {
   //     await connection.close(con);
   //   }
   // },
-
-  getBySpacer: async (fk_id_order,con) => {
-    try {
-      const orderRequestM = await orderRequestModel.create(con);
-      const orderRequests = await orderRequestM.findAll({ where: { fk_id_order } })
-       return orderRequests;
-    } catch (ValidationError) {
-        console.log(ValidationError);
-        return 
-    }
-  },
 }
 
 module.exports = orderRequest;

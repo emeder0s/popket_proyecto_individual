@@ -7,6 +7,7 @@ const space = require("../controllers/space.controllers");
 const product = require("../controllers/product.controllers");
 const order = require("../controllers/order.controllers");
 const usersSpacersOrder = require("../controllers/users_spacers_orders.controllers");
+const ordersRequest = require("../controllers/orders_requests.controllers");
 
 //SESSION
 router.post("/login", session.login); //Login
@@ -44,6 +45,8 @@ router.delete("/delete-space/:id",space.delete ) //Borra un space
 router.get("/get-space-by-user",space.getByUser) //Devuelve el id del space
 router.get("/show-space-by-spacer",space.showBySpacer) //Devuelve los datos de un space
 router.get("/all-spaces",space.getAll) //Devuelve todoslos spaces
+router.get("/get-orders-request/:spacer_id",space.getAllOrdersRequest);
+router.get("/get-orders-request-and-products/:spacer_id",space.getAllOrdersRequest);
 
 //PRODUCTS
 router.post("/new-product", product.new); //Añade un space

@@ -3,34 +3,25 @@ import '../../style/body.css';
 import '../../style/my-account.css';
 
 function RequestOrders(props) { 
-    const [msn,setMsn] =  useState("");
-    const [errorMsn,setErrorMsn] =  useState("");
-    const [noOrderMsn,setNoOrderMsn] =  useState("");
-    const [orders,setOrders] = useState();
+    const [request,setRequest] = useState();
+    props.setRequests("");
 
-    // const getOrders = async () => {
-    //     var id_user_spacer = JSON.parse(localStorage.getItem("user")).id;
-    //     await fetch(`/get-orders-request/${id_user_spacer}`)
-    //     .then((res) => res.json(res))
-    //     .then(res=>{
-    //         console.log(res);   
-    //     })
-    // }
-
-    // useEffect(()=>{getOrders()},[]);
-
-    const formatDate = (date) => {
-        var time = date.split("T")[1];
-        time = time.split(".")[0];
-        date = date.split("T")[0];
-        
-        return date +' '+ time;
+    const getOrdersRequest = async () => {
+        var id_user_spacer = JSON.parse(localStorage.getItem("user")).id;
+        await fetch(`/get-orders-request/${id_user_spacer}`)
+        .then((res) => res.json(res))
+        .then(res=>{
+            console.log(res);   
+        })
     }
+
+    useEffect(()=>{getOrdersRequest()},[]);
 
     return(
         <div className="orders-container">
-            {/* <h3>Pedidos</h3>
-            <p id="no-order-message" style={{display: "none"}}>Aún no has realizado ningún pedido</p>
+             <h3>Solicitudes de pedidos</h3>
+            <p id="no-order-message" style={{display: "none"}}>Aún no hay solicitudes</p>
+            {/*
             {orders ? 
                orders.map((order, i) => {
                 return(

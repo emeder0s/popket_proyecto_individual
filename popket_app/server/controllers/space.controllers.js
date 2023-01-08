@@ -3,6 +3,7 @@ const session = require("./session.controllers");
 const spaceModel = require("../models/space.model");
 const order = require("./order.controllers");
 const product = require("./product.controllers");
+const orderRequest = require("./orders_requests.controllers");
 
 const space = {
   /**
@@ -136,6 +137,22 @@ const space = {
     }finally{
       await connection.close(con);
     }
+  },
+
+  getAllOrdersRequest: async (req,res) => {
+      try {
+        var con = await connection.open();
+        var fk_id_spacer = req.params.spacer_id;
+        const spaceM = await spaceModel.create(con);
+        const space = await spaceM.findOne({where :{fk_id_spacer}})
+        const orderRequests = await orderRequest.getBySpace(space.dataValues.id,con)
+        res.json(orderRequests);
+      } catch (ValidationError) {
+        console.log(ValidationError);
+        res.json(false);
+      }finally{
+        await connection.close(con);
+      }
   },
 
   getSpacerFromSpace: async (id,con)=> {

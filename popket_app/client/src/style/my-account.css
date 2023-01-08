@@ -114,3 +114,9 @@ ul.all-users li.active{
     margin-bottom: 16px;
 }
 
+.warning-requests {
+    background: #ed7c91;
+    padding: 3px 10px;
+    color: white;
+}
+
