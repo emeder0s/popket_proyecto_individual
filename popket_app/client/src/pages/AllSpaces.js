@@ -7,6 +7,7 @@ import '../style/all-space.css';
 
 function AllSpaces(){
     var [spaces,setSpaces] = useState();
+    var [search,setSearch] = useState();
 
     const getSpaces = () => {
         fetch("/all-spaces")
@@ -14,6 +15,8 @@ function AllSpaces(){
         .then(res=>{
             if (res.length > 0){
                 setSpaces(res);
+                var results = res.map(() =>{return true})
+                setSearch(results);
             }else{
                 document.getElementById("no-order-message").style.display="block";
             }           
@@ -27,13 +30,16 @@ function AllSpaces(){
     const searchSpace = (e) => {
         if(e.key === 'Enter'){
             var value = document.getElementById("search-box").value.toLowerCase();
-            var results = spaces.filter((space,i) =>{
+            var results = spaces.map((space,i) =>{
                  var name = space.name_space.toLowerCase(); 
                  if (name.includes(value)){
-                     return space
-                 }
-            }) 
-            setSpaces(results);
+                     return true
+                 }else{
+                    return false
+                }
+            })
+            console.log(results); 
+            setSearch(results);
         }
     }
 
@@ -44,9 +50,7 @@ function AllSpaces(){
         { spaces ? 
             <div className="spaces">
                 {spaces.map((space, i) => {
-                    return (
-                        <Link to={`/espacio/${space.id}`} className="nav-link" key={i}><SpaceBox space={space}></SpaceBox></Link>
-                    )
+                    return search[i] ? <Link to={`/espacio/${space.id}`} className="nav-link" key={i}><SpaceBox space={space}></SpaceBox></Link> : ""
                 })}
             </div>
          : ""}
