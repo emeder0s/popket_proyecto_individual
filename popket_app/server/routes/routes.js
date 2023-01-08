@@ -46,7 +46,7 @@ router.get("/get-space-by-user",space.getByUser) //Devuelve el id del space
 router.get("/show-space-by-spacer",space.showBySpacer) //Devuelve los datos de un space
 router.get("/all-spaces",space.getAll) //Devuelve todoslos spaces
 router.get("/get-orders-request/:spacer_id",space.getAllOrdersRequest);
-router.get("/get-orders-request-and-products/:spacer_id",space.getAllOrdersRequest);
+router.get("/get-orders-request-and-products/:spacer_id",space.getAllOrdersRequestAndProducts);
 
 //PRODUCTS
 router.post("/new-product", product.new); //Añade un space
@@ -62,5 +62,6 @@ router.post("/edit-order", order.edit); //Modifica un space
 router.get("/order/:id",order.show); //Elimina un space
 router.delete("/delete-order/:id",order.delete )//Borra un space
 router.get("/orders/:name_table/:id_user_spacer",order.getOrders)//Devuelve los orders de un usuario
+router.post("/edit-request-state", order.editState); //Modifica un space
 
 module.exports = router;

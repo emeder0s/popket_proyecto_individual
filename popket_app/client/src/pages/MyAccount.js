@@ -13,7 +13,7 @@ function MyAccount() {
     var auth = checkAuth();
     const [viewIsSpacer, setViewIsSpacer] = useState(JSON.parse(localStorage.getItem("user")).isSpacer);
     const [activeContent, setActiveContent] = useState("personal-data");
-    const [requests,setRequests] = useState("");
+    const [numRequests,setNumRequests] = useState("");
     const activeLi = (optionId) => {
         var activeOne = document.getElementsByClassName("menu-option active")[0];
          if (activeOne.getAttribute("id") != optionId){
@@ -28,7 +28,7 @@ function MyAccount() {
         await fetch(`/get-orders-request/${spacer}`)
         .then((res) => res.json(res))
         .then(res=>{
-            setRequests(res.length);   
+            setNumRequests(res.length);   
         })
 
     }
@@ -47,7 +47,7 @@ function MyAccount() {
                    <li id="address" className="menu-option" onClick={() => activeLi("address")}>Dirección</li>
                    <li id="password" className="menu-option" onClick={() => activeLi("password")}>Contraseña</li>
                    <li id="orders" className="menu-option" onClick={() => activeLi("orders")}>Pedidos</li> 
-                   {viewIsSpacer ? <li id="request-orders" className="menu-option" onClick={() => activeLi("request-orders")}>Solicitudes de Pedido {requests > 0 ? <span className="warning-requests ">{requests}</span>:""}</li> : ""}
+                   {viewIsSpacer ? <li id="request-orders" className="menu-option" onClick={() => activeLi("request-orders")}>Solicitudes de Pedido {numRequests > 0 ? <span className="warning-requests ">{numRequests}</span>:""}</li> : ""}
                    {viewIsSpacer ? <li><Link to='/editar-space' className="nav-link nav-link-space">Editar Espacio</Link></li> : ""}
                 </ul>
             </div>
@@ -56,7 +56,7 @@ function MyAccount() {
                 {activeContent == "address" ? <div id="address-content" className="address" ><AddressForm isSpacer={viewIsSpacer}></AddressForm></div> : ""}
                 {activeContent == "password" ? <div id="password-content" className="password"><PasswordForm isSpacer={viewIsSpacer}></PasswordForm></div> : ""}
                 {activeContent == "orders" ? <div id="orders-content" className="orders" ><Orders isSpacer={viewIsSpacer}></Orders></div> : ""}
-                {activeContent == "request-orders" ? <div id="request-orders-content" className="request-orders"><RequestOrders isSpacer={viewIsSpacer} setRequests={setRequests}></RequestOrders></div> : ""}         
+                {activeContent == "request-orders" ? <div id="request-orders-content" className="request-orders"><RequestOrders isSpacer={viewIsSpacer} setNumRequests={setNumRequests}></RequestOrders></div> : ""}         
             </div>
         </div>
     )

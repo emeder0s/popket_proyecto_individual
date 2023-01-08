@@ -96,8 +96,8 @@ const product = {
   getByOrder: async(fk_id_order,con) => {
     var orderProducts = await orderProduct.getByOrder(fk_id_order,con);
     if (orderProducts){
-      const productM = await productModel.create(con);
-      const products = await Promise.all(orderProducts.map(async element =>{
+        const productM = await productModel.create(con);
+        const products = await Promise.all(orderProducts.map(async element =>{
         var product = await productM.findOne({ where: { id:element.dataValues.fk_id_product } });
         return {product, quantity:element.dataValues.quantity}
       }));

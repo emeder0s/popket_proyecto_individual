@@ -1,5 +1,6 @@
 const connection = require("../databases/sequelize");
 const orderModel = require("../models/order.model");
+const orderRequestModel = require("../models/orders_requests.model");
 const orderProduct = require("./orders_products.controllers");
 const userSpacerOrder = require ("./users_spacers_orders.controllers")
 const session = require("./session.controllers");
@@ -72,6 +73,12 @@ const order = {
       await connection.close(con);
     }
   },
+
+  getById: async (id,con) => {
+      const orderM = await orderModel.create(con);
+      const order = await orderM.findOne({ where: { id } })
+      return order.dataValues
+  },
   
   /**
      * Borra un order.
@@ -138,6 +145,32 @@ const order = {
       var date = datetime.split(",")[0].split("/");
       return `${date[2]}-${date[1]}-${date[0]}${time}`
     },
+
+    /**
+     * Actualiza el estado de un pedido
+     * @param {int} id 
+     * @param {string} state 
+     */
+
+    editState: async (req,res) =>{
+      try {
+        const { id, state } = req.body;
+        console.log(id);
+        console.log(state);
+        var con = await connection.open();
+        const orderRequestM = await orderRequestModel.create(con);
+        const orderM = await orderModel.create(con);
+        const orderRequest = await orderRequestM.update({ state }, {where :{id}})
+        const order = await orderM.update({ state }, {where :{id}})
+        state == "accept" ? await orderM.update({ state: "Aceptado" }, {where :{id}}) : await orderM.update({ state: "Enviado" }, {where :{id}}) ;
+        res.json(true);
+      } catch (ValidationError) {
+          console.log(ValidationError);
+        res.json(false);
+      }finally{
+        await connection.close(con);
+      }
+    }
 }
 
 module.exports = order;
