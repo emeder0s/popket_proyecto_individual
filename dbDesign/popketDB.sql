@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS orders_requests(
         fk_id_spacer INT NOT NULL,
         PRIMARY KEY(id),
         FOREIGN KEY (fk_id_order) REFERENCES orders(id) ON DELETE CASCADE,
-        FOREIGN KEY (fk_id_spacer) REFERENCES spacer(id)
+        FOREIGN KEY (fk_id_spacer) REFERENCES spacers(id)
 );
 
 
