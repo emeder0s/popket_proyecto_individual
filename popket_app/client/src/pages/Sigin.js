@@ -1,6 +1,7 @@
 import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
+import { checkCart } from '../helpers/checkCart';
 import Cookies from 'universal-cookie';
 import '../style/body.css';
 import '../style/sigin.css';
@@ -21,7 +22,7 @@ function Sigin() {
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user));
-                localStorage.setItem("cart",JSON.stringify([]));
+                checkCart();
                 navigate("/");
             }else{
                 setMsn(res.msn);

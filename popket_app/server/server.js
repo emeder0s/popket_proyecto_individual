@@ -38,6 +38,9 @@ app.post("/upload-image", upload.single("file"), (req, res) => {
 });
 app.get('/uploads/:id_space/:file', (req, res) => {
     res.sendFile(`${__dirname}/uploads/${req.params.id_space}/${req.params.file}`);
-  });
+});
+app.get('/uploads/:file', (req, res) => {
+  res.sendFile(`${__dirname}/uploads/${req.params.file}`);
+});
 
 app.listen(port, () => console.log(`Server ON: ${port}`));

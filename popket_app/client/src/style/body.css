@@ -66,7 +66,7 @@ input{
     font-family: 'Montserrat', sans-serif;
 }
 
-input:focus{
+select:focus, textarea:focus, input:focus{
  outline: none;
 }
 
@@ -84,7 +84,7 @@ select option{
 
 textarea{
     border: 1px solid #888a8c;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     background-color: #fefefe;
     padding:6px;
     font-family: 'Montserrat', sans-serif;

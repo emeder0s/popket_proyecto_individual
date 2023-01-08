@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
 import { checkAuth } from '../helpers/checkAuth';
-import  AddProduct  from '../components/sigin/AddProduct';
+import { checkCart } from '../helpers/checkCart';
 import Cookies from 'universal-cookie';
 import '../style/body.css';
 import '../style/sigin-spacer.css';
@@ -25,7 +25,7 @@ function SiginSpacer() {
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user))
-                localStorage.setItem("cart",JSON.stringify([]));
+                checkCart();
                 setAuth(localStorage.getItem("user"));
             }else{
                 setMsn(res.msn);

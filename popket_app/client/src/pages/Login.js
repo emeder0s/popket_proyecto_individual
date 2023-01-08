@@ -2,6 +2,7 @@ import React, { useState }  from "react";
 import { useNavigate } from 'react-router-dom';
 import { postFetch } from '../helpers/fetchs';
 import { checkAuth } from '../helpers/checkAuth';
+import { checkCart } from '../helpers/checkCart';
 import { useContext } from 'react';
 import UserContext from "../components/context/UserContext";
 import Cookies from 'universal-cookie';
@@ -22,10 +23,11 @@ function Login() {
         await postFetch("/login", data)
         .then((res) => res.json(res))
         .then(res=>{
+            console.log();
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
-                localStorage.setItem("user",JSON.stringify(res.user))
-                localStorage.setItem("cart",JSON.stringify([]));
+                localStorage.setItem("user",JSON.stringify(res.user));
+                checkCart();
                 setUser(res.user);
             }else{
                 setMsn(res.msn);
