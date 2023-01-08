@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS spaces(
         description VARCHAR(500), 
 		state VARCHAR(6) DEFAULT "draft",
         fk_id_spacer INT,
+        image VARCHAR(512),
         PRIMARY KEY(id),
         FOREIGN KEY (fk_id_spacer) REFERENCES spacers(id) ON DELETE CASCADE
 );
@@ -89,5 +90,15 @@ CREATE TABLE IF NOT EXISTS users_spacers_orders(
         PRIMARY KEY(id),
         FOREIGN KEY (fk_id_order) REFERENCES orders(id)
 );
+
+CREATE TABLE IF NOT EXISTS orders_requests(
+        id INT AUTO_INCREMENT NOT NULL,
+        fk_id_order INT NOT NULL,
+        fk_id_spacer INT NOT NULL,
+        PRIMARY KEY(id),
+        FOREIGN KEY (fk_id_order) REFERENCES orders(id) ON DELETE CASCADE,
+        FOREIGN KEY (fk_id_spacer) REFERENCES spacer(id)
+);
+
 
 SELECT * FROM spaces
