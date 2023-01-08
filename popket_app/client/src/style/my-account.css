@@ -98,3 +98,9 @@ ul.all-users li.active{
 .nav-link-space{
     color: #ed7c91;
 }
+
+.action svg{
+    margin-top: 0px !important;
+    margin-bottom: 16px;
+}
+

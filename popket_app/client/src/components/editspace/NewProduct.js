@@ -29,7 +29,7 @@ function NewProduct(props) {
     }
 
     const uploadImage = (e) => {
-        console.log(space);
+       
         e.preventDefault();
         var formData = new FormData();
         formData.append("file", image);

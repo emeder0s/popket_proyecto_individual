@@ -28,12 +28,12 @@ function AllSpaces(){
         if(e.key === 'Enter'){
             var value = document.getElementById("search-box").value.toLowerCase();
             var results = spaces.filter((space,i) =>{
-                var name = space.name_space.toLowerCase(); 
-                if (name.includes(value)){
-                    return space
-                }
+                 var name = space.name_space.toLowerCase(); 
+                 if (name.includes(value)){
+                     return space
+                 }
             }) 
-            setSpaces(results)
+            setSpaces(results);
         }
     }
 

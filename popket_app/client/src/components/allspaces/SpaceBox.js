@@ -5,7 +5,7 @@ function SpaceBox(props) {
   return (
     <div className="space-box">
         <div>
-            <img src={`http://localhost:5000/uploads/1/space.png`}></img>
+            <img src={`http://localhost:5000/uploads/space2.png`}></img>
         </div>
         <div className="space-name">{space.name_space}</div>
     </div>   

@@ -7,6 +7,7 @@ function Orders(props) {
     const [errorMsn,setErrorMsn] =  useState("");
     const [noOrderMsn,setNoOrderMsn] =  useState("");
     const [orders,setOrders] = useState();
+    console.log(props.isSpacer);
 
     const getOrders = async () => {
         var id_user_spacer = JSON.parse(localStorage.getItem("user")).id;

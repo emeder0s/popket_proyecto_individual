@@ -5,7 +5,6 @@ import '../style/order.css';
 
 function OrderDone(){
     const order = JSON.parse(localStorage.getItem("order"));
-    console.log(order);
 
     const getPrice = (price, quantity) => {
         return parseFloat(price) * parseInt(quantity)

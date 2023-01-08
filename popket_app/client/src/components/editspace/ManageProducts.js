@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from "react";
 import { useNavigate } from 'react-router-dom';
+import { FaTrashAlt, FaPen } from "react-icons/fa";
 import { postFetch } from '../../helpers/fetchs';
 import '../../style/body.css';
 
@@ -121,7 +122,7 @@ function ManageProducts(props) {
             <div>
             <h4>Tus productos</h4>
             {products ? 
-                <div className="products-container">
+                <div className="products-container-account">
                     <table className="products-table"> 
                         <thead>
                             <tr className="header">
@@ -139,7 +140,7 @@ function ManageProducts(props) {
                                         <td key={`product-name-${i}`}>{product.product_name}</td>
                                         <td key={`description-${i}`}>{product.description}</td>
                                         <td key={`price-${i}`}>{product.price}</td>
-                                        <td key={`action-${i}`}> <a className="action" key={`edit-${i}`} onClick= {()=>{selectedToEdit(product)}}>Editar</a> | <a className="action" key={`delete-${i}`} onClick= {()=>{deleteProduct(product.id,product.product_name)}}>Borrar</a></td>
+                                        <td key={`action-${i}`}> <a className="action" key={`edit-${i}`} onClick= {()=>{selectedToEdit(product)}}><FaPen/></a> <a className="action" key={`delete-${i}`} onClick= {()=>{deleteProduct(product.id,product.product_name)}}><FaTrashAlt/></a></td>
                                     </tr>
                                 )
                             })}

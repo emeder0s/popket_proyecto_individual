@@ -23,7 +23,6 @@ function Login() {
         await postFetch("/login", data)
         .then((res) => res.json(res))
         .then(res=>{
-            console.log();
             if(res.validation){
                 cookies.set('session', res.jwt, { path: '/' });
                 localStorage.setItem("user",JSON.stringify(res.user));

@@ -22,7 +22,6 @@ function Address(props) {
         .then(res=>{
             setAddress(res);
             if(res){
-                console.log( document.getElementById("via_type"));
                 document.getElementById("via_type").value = res.via_type;
             }
         }) 

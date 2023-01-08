@@ -9,7 +9,6 @@ function ShoppingCart() {
 
 
     useEffect(()=>{
-      console.log();
       if (cart == null || cart.length < 0)
       {
         setViewCart(false);
