@@ -3,6 +3,7 @@
     background-position: right bottom;
     background-size: 101% 30%;
     background-repeat: no-repeat;
+    overflow: scroll;
 }
 
 .page-content-product .product-container{

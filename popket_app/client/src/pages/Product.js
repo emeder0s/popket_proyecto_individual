@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState, useContext } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import { useParams, Link } from "react-router-dom";
+import { postFetch } from '../helpers/fetchs';
+import { useParams } from "react-router-dom";
 import CartContext from "../components/context/CartContext";
 import '../style/body.css';
 import '../style/product.css';
@@ -40,8 +41,15 @@ function Product() {
         }
     };
 
-    const saveFavorite = () => {
+    const saveFavorite = async () => {
         setFavorite(true);
+        var data = {fk_id_product:id};
+        await postFetch("/save-favorite-product", data)
+        .then((res) => res.json(res))
+        .then(res=>{
+            console.log(res);
+        })
+
     }
 
     const deleteFavorite = () => {

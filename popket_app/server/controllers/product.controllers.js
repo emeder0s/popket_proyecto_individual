@@ -1,6 +1,9 @@
 const connection = require("../databases/sequelize");
+const mongoose = require("../databases/mongo.js");
 const productModel = require("../models/product.model");
+const favoriteModel = require("../models/favorite.model");
 const orderProduct = require("./orders_products.controllers");
+const session = require("./session.controllers");
 
 const product = {
   /**
@@ -144,6 +147,25 @@ const product = {
       await connection.close(con);
     }
 },
+  /**
+   * Guarda el producto como favorito
+   * @param {*} req 
+   * @param {*} res 
+   */
+  saveFavorite: async (req,res) => {
+    try{
+      const fk_id_product = req.body.fk_id_product;
+      const fk_id_user = session.get_id_from_cookie(req);
+      await mongoose.conn();
+      console.log(fk_id_product);
+      const hola = await favoriteModel.create({fk_id_user, fk_id_product});
+      console.log(hola);
+      res.json(true);
+    }catch(e){
+      console.log(e);
+      res.json(false);
+    }
+  }
 }
 
 module.exports = product;
