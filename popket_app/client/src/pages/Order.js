@@ -3,6 +3,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import OrderAddress from '../components/order/OrderAddress';
 import Pay from '../components/order/Pay';
 import { checkAuth } from '../helpers/checkAuth';
+import { postFetch } from '../helpers/fetchs';
 import '../style/order.css'
 
 
@@ -49,8 +50,22 @@ function Order() {
       return `${via_type} ${via_name} ${via_number} ${additional_address}, ${postal_code}, ${locality} ${province} ${country}`
     }
 
-    const saveOrder = () => {
-      var order = {address:addressToString(),total_account:total,products}
+    const saveOrder = async (e) => {
+      e.preventDefault();
+      var productsArray = [];
+      var quantity = [];
+      products.map((element)=>{
+        productsArray.push(element.product);
+        quantity.push(element.quantity);
+      })
+      
+      var order = {address:addressToString(),total_account:total,products:productsArray,quantity}
+      await postFetch("/new-order", order)
+      .then((res) => res.json(res))
+      .then(res=>{
+          console.log(res);
+      })
+      
       localStorage.setItem("order",JSON.stringify(order));
     }
     

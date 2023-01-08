@@ -14,14 +14,14 @@ const order = {
    */
   new: async (req, res) => {
     try {
-      const { num_order, address, total_account, products, quantity } = req.body;
       var con = await connection.open();
+      const num_order = await order.getNumOrder(con);
+      const { address, total_account, products, quantity } = req.body;
       const orderM = await orderModel.create(con);
-      const order = await orderM.create({ num_order, address, total_account });
+      const order = await orderM.create({ num_order, address, order_date, total_account });
       await Promise.all(products.map(async (product, index) =>{
-        await orderProduct.new(product,order.dataValues.id,quantity[index],con);
-        }
-      ));
+         await orderProduct.new(product,order.dataValues.id,quantity[index],con);
+      }));
       var table = await session.is_user_or_spacer(session.get_email_from_cookie(req),con);
       await userSpacerOrder.new(session.get_id_from_cookie(req),order.dataValues.id,table, con);
       res.json(true);
@@ -109,6 +109,17 @@ const order = {
     }finally{
       await connection.close(con);
     }
+  },
+
+  getNumOrder: async (con) => {
+    var exist = false;
+    do{
+      var num = parseInt(Math.random()*100000000000);
+      var num_order = "PK"+ num.toString();
+      const orderM = await orderModel.create(con);
+      await orderM.findOne({ where: { num_order } }) ? exist=true : exist=false;
+    }while (exist)
+    return num_order;
   }
 }
 
