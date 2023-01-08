@@ -34,7 +34,7 @@ function ShoppingCart() {
 
     const redirect = () => {
       document.getElementById("nav-link-cart").click();
-      navigate("/order");
+      navigate("/tramitar-pedido");
     }
 
   return (

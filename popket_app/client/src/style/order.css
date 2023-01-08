@@ -3,6 +3,7 @@
     /* background-color:#fefefe; */
     height: 85%;
     overflow-y: scroll;
+    background: url("../img/intro.jpg") no-repeat center top;
 }
 
 input:focus{
@@ -28,4 +29,13 @@ h3,h4 {
 .pay-row input {
     width: 100%;
     margin-bottom: 16px;
+}
+
+.small {
+    font-size: 12px;
+}
+
+.order-details-container{
+    background: #fefefe;
+    padding: 16px;
 }

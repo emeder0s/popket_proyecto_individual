@@ -58,14 +58,20 @@ function Order() {
         productsArray.push(element.product);
         quantity.push(element.quantity);
       })
-      
+
       var order = {address:addressToString(),total_account:total,products:productsArray,quantity}
       await postFetch("/new-order", order)
       .then((res) => res.json(res))
       .then(res=>{
-          console.log(res);
+          if (res){
+            order.num_order = res.num_order;
+            order.total_account = res.total_account;
+            localStorage.setItem("cart", JSON.stringify([]));
+            navigate("/pedido-realizado")
+          }else{
+            document.getElementById("error-message").style.display = "block"
+          }
       })
-      
       localStorage.setItem("order",JSON.stringify(order));
     }
     
@@ -92,14 +98,15 @@ function Order() {
               :<p>No hay productos en el carrito. ¿A qué esperas?</p>}   
           </div>
         </div>
-        <div className="border-div">
-          <OrderAddress isSpacer={viewIsSpacer}></OrderAddress >
+          <div className="border-div">
+            <OrderAddress isSpacer={viewIsSpacer}></OrderAddress >
+          </div>
+          <div className="border-div"> 
+                <Pay></Pay>
+          </div>
+          <p id="error-message" style={{display: "none"}}>Ups! Algo ha ido mal, vuelve a intentarlo</p>
+          <button onClick={saveOrder}>Realizar Pedido</button>
         </div>
-        <div className="border-div"> 
-              <Pay></Pay>
-        </div>
-        <button onClick={saveOrder}>Realizar Pedido</button>
-      </div>
       :
        <div>Tienes que estar logueado</div>
       }

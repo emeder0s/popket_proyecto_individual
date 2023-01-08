@@ -10,6 +10,7 @@ import AllSpaces from '../pages/AllSpaces';
 import Space from '../pages/Space';
 import Product from '../pages/Product';
 import Order from '../pages/Order'
+import OrderDone from '../pages/OrderDone'
 
 export const Router = () => {
     return (
@@ -24,7 +25,8 @@ export const Router = () => {
                 <Route path="/espacios" element={<AllSpaces/>} />
                 <Route path="/espacio/:id" element={<Space/>} />
                 <Route path="/producto/:id" element={<Product/>} />
-                <Route path="/order" element={<Order/>} />
+                <Route path="/tramitar-pedido" element={<Order/>} />
+                <Route path="/pedido-realizado" element={<OrderDone/>} />
             </Routes>
         </div>
     )
