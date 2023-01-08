@@ -4,7 +4,7 @@ const orderProduct = require("./orders_products.controllers");
 const userSpacerOrder = require ("./users_spacers_orders.controllers")
 const session = require("./session.controllers");
 const product = require("./product.controllers");
-
+const orderRequest = require("./orders_requests.controllers");
 
 const order = {
   /**
@@ -20,11 +20,16 @@ const order = {
       const order_date = order.formatDate(new Date().toLocaleString());
       const orderM = await orderModel.create(con);
       const o = await orderM.create({ num_order, address, order_date, total_account, state: "Pendiente de confirmación" });
+      var spaceWithR = [];
       await Promise.all(products.map(async (product, index) =>{
          await orderProduct.new(product.id,o.dataValues.id,quantity[index],con);
+         if (!spaceWithR.includes(product.fk_id_space)){
+          spaceWithR.push(product.fk_id_space)
+         }
       }));
       var table = await session.is_user_or_spacer(session.get_email_from_cookie(req),con);
       await userSpacerOrder.new(session.get_id_from_cookie(req),o.dataValues.id,table, con);
+      await orderRequest.new(o.dataValues.id,spaceWithR,con);
       res.json(o);
     } catch (ValidationError) {
         console.log(ValidationError);

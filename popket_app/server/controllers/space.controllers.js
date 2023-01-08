@@ -1,6 +1,8 @@
 const connection = require("../databases/sequelize");
 const session = require("./session.controllers");
 const spaceModel = require("../models/space.model");
+const order = require("./order.controllers");
+const product = require("./product.controllers");
 
 const space = {
   /**
@@ -134,7 +136,14 @@ const space = {
     }finally{
       await connection.close(con);
     }
+  },
+
+  getSpacerFromSpace: async (id,con)=> {
+    const spaceM = await spaceModel.create(con);
+    const space = await spaceM.findOne({where :{id}})
+    return space.dataValues.fk_id_spacer;
   }
+
 }
 
 module.exports = space;

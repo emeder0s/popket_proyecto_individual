@@ -121,6 +121,16 @@ const product = {
     }
   },
 
+  returnBySpace: async (fk_id_space,con) => {
+    try {
+      const productM = await productModel.create(con);
+      const products = await productM.findAll({ where: { fk_id_space} });
+      return products;
+    } catch (ValidationError) {
+        console.log(ValidationError);
+    }
+  },
+
   getImagesById: async (req, res) => {
     try {
       var con = await connection.open();  
