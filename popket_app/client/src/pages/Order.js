@@ -12,10 +12,13 @@ function Order() {
     const navigate = useNavigate();
     var auth = checkAuth();
     const [products, setProducts] = useState(false);
-    const [viewIsSpacer, setViewIsSpacer] = useState(JSON.parse(localStorage.getItem("user")).isSpacer);
+    const [viewIsSpacer, setViewIsSpacer] = useState(false);
     const [total, setTotal] = useState();
 
     useEffect(()=>{
+      if (auth){
+        setViewIsSpacer(JSON.parse(localStorage.getItem("user")).isSpacer)
+      }
       var c = JSON.parse(cart);
       if (c.length > 0) {
         setProducts(JSON.parse(cart));
