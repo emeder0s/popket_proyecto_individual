@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SpaceBox from "../components/allspaces/SpaceBox";
+import {Footer} from "../components/Footer"
 import { Link, NavLink } from 'react-router-dom';
 import '../style/body.css';
 import '../style/home.css';
@@ -38,7 +39,6 @@ function AllSpaces(){
                     return false
                 }
             })
-            console.log(results); 
             setSearch(results);
         }
     }
@@ -54,6 +54,7 @@ function AllSpaces(){
                 })}
             </div>
          : ""}
+        
     </div>   
   );
 }

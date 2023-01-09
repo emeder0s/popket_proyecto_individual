@@ -12,7 +12,7 @@ function Order() {
     const navigate = useNavigate();
     var auth = checkAuth();
     const [products, setProducts] = useState(false);
-    const [viewIsSpacer, setViewIsSpacer] = useState( JSON.parse(localStorage.getItem("user")).isSpacer);
+    const [viewIsSpacer, setViewIsSpacer] = useState(JSON.parse(localStorage.getItem("user")).isSpacer);
     const [total, setTotal] = useState();
 
     useEffect(()=>{

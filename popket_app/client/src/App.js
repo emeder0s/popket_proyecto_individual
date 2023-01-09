@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {BrowserRouter} from "react-router-dom";
 import { Router } from './router/router';
 import {Navigation} from './components/Navigation';
+import {Footer} from './components/Footer';
 import ShoppingCart from './components/ShoppingCart';
 import UserContext from "./components/context/UserContext";
 import CartContext from "./components/context/CartContext";
@@ -22,6 +23,7 @@ function App() {
           {viewCart ? <ShoppingCart></ShoppingCart> : ""}
           <Router></Router>
           </div>
+          {/* <Footer></Footer> */}
         </UserContext.Provider>
       </CartContext.Provider>
       </BrowserRouter>

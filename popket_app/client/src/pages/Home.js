@@ -3,6 +3,7 @@ import Intro from '../components/home/IntroContainer';
 import AboutUs from '../components/home/AboutUsContainer';
 import AboutSpaces from '../components/home/AboutSpacesContainer';
 import BeSpacer from '../components/home/BeSpacerContainer';
+import {Footer} from "../components/Footer"
 import '../style/home.css';
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
             <AboutUs></AboutUs>
             <AboutSpaces></AboutSpaces>
             <BeSpacer></BeSpacer>
+            <Footer></Footer>
         </div>
     </div>   
   );

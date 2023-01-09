@@ -28,3 +28,19 @@ nav div a {
 .nav-link-margin-right{
     margin-right: 10px;
 }
+
+footer{
+    display: flex;
+    flex-direction: column;
+    padding: 3px 300px;
+    box-shadow: 0px 5px 19px #b5b5b5;
+}
+
+footer .row {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+footer .h3 {
+    font-size: 40px;
+}
