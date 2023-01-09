@@ -1,0 +1,34 @@
+{
+  "name": "popket_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "html-pdf": "^3.0.1",
+    "js": "^0.1.0",
+    "jsdoc": "^4.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.3",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "puppeteer": "^19.3.0",
+    "sequelize": "^6.25.8"
+  }
+}

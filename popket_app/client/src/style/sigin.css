@@ -1,0 +1,32 @@
+.page-content-sigin {
+    background: url("../img/spot2.png");
+    background-position: right center;
+    background-size: 55% auto;
+    background-repeat:no-repeat;
+     /* height: 100vh; */;
+}
+
+.form-sigin {
+    width: 39%;
+    display: flex;
+    flex-direction: column;
+    padding: 56px;
+}
+
+.form-sigin form{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.form-sigin form *{
+    margin-bottom: 16px;
+}
+
+input{
+    padding: 6px;
+}
+
+button{
+    padding:1% 4%;
+}

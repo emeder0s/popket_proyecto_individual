@@ -1,0 +1,48 @@
+.page-content-order {
+    padding:56px 168px;
+    /* background-color:#fefefe; */
+    height: 85%;
+    overflow-y: scroll;
+}
+
+.page-content-order-done{
+    padding:56px 168px;
+    /* background-color:#fefefe; */
+    height: 85%;
+    overflow-y: scroll;
+    background: url("../img/intro.jpg") no-repeat center top;
+}
+
+input:focus{
+    outline: none;
+}
+   
+
+.border-div {
+    border: 1px solid grey;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.total-div{
+    text-align: right;
+    font-weight: 500;
+}
+
+h3,h4 {
+    font-weight: 600;
+}
+
+.pay-row input {
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.small {
+    font-size: 12px;
+}
+
+.order-details-container{
+    background: #fefefe;
+    padding: 16px;
+}

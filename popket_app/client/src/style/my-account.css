@@ -1,0 +1,141 @@
+ul li {
+    list-style: none;
+    margin: 24px;
+}
+
+ul li:hover {
+    color:darkgrey;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+ul.all-users li.active{
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.page-content-account {
+    display: flex;
+    flex-direction: row;
+    /*  /* height: 100vh; */; 
+}
+
+.sidebar {
+    width: 30%;
+}
+
+.sidebar-content{
+    width: 100%;
+    box-shadow: -11px 0px 13px -15px #d6d6d6;
+    padding: 30px;
+    height: 85%;
+    overflow-y: scroll;
+}
+
+.personal-data-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.personal-data-form form *{
+    margin-bottom:16px;
+}
+
+.product-img-account{
+    background-color: #cba191;
+    width: 70px;
+    height: 70px;
+    margin-right: 20px;
+}
+.product-image-account{
+    width: 70px;
+    height: 70px;
+    
+}
+
+.product-name-account{
+    margin-right: 20px;
+}
+
+.product{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 16px;
+}
+
+.product-name{
+    margin-left:30px;
+}
+
+.product-price{
+    margin-left:60px;
+}
+
+.general-state{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.general-state div{
+    margin-top:8px
+}
+
+.box-order{
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.total-price{
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.separator{
+    background: url("../img/separator3.png");
+    background-position: center center;
+    background-size: 100% auto;
+    background-repeat:no-repeat;
+    height: 30px;  
+}
+
+.nav-link-space{
+    color: #ed7c91;
+}
+
+.action svg{
+    margin-top: 0px !important;
+    margin-bottom: 16px;
+}
+
+.warning-requests {
+    background: #ed7c91;
+    padding: 3px 10px;
+    color: white;
+}
+
+.accept-button{
+    background: #ed7c91;
+    color: #fefefe;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.send-button{
+    background: green;
+    color: #fefefe;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.box-order-request .separator{
+    margin-top: 10px;
+}
+
+
